@@ -1,8 +1,12 @@
 extends Navigation2D
 
-
-
-
+onready var cell = null
+onready var new_abc = null
+onready var tilemap = $TileMap
+func _ready() -> void:
+	pass
+	
+	
 
 export(float) var character_speed = 400.0
 var path = []
@@ -10,8 +14,16 @@ var path = []
 onready var character = $Character
 
 func _process(delta):
+	
+	var mouse :Vector2 = get_global_mouse_position()
+	var cell :Vector2 = tilemap.world_to_map(mouse)
+	var abc :int = tilemap.get_cellv(cell)
+	var new_abc :int = 1
+	
 	var walk_distance = character_speed * delta
 	move_along_path(walk_distance)
+	if Input.is_action_just_pressed("click"):
+		tilemap.set_cellv(cell, new_abc)
 
 
 # The "click" event is a custom input action defined in
