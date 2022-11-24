@@ -1,8 +1,9 @@
 extends Navigation2D
 
 onready var cell = null
-onready var new_abc = null
+onready var new_abc = 0
 onready var tilemap = $TileMap
+var building = false
 func _ready() -> void:
 	pass
 	
@@ -18,11 +19,11 @@ func _process(delta):
 	var mouse :Vector2 = get_global_mouse_position()
 	var cell :Vector2 = tilemap.world_to_map(mouse)
 	var abc :int = tilemap.get_cellv(cell)
-	var new_abc :int = 1
+	
 	
 	var walk_distance = character_speed * delta
 	move_along_path(walk_distance)
-	if Input.is_action_just_pressed("click"):
+	if Input.is_action_just_pressed("click") and building == true:
 		tilemap.set_cellv(cell, new_abc)
 
 
@@ -60,3 +61,24 @@ func _update_navigation_path(start_position, end_position):
 	# We don't need it in this example as it corresponds to the character's position.
 	path.remove(0)
 	set_process(true)
+
+
+
+	
+
+
+func _on_Button_pressed() -> void:
+	if building == false:
+		building = true
+	else:
+		building = false
+
+
+func _on_TextureButton_pressed() -> void:
+	if building == true:
+		new_abc = 0
+
+
+func _on_TextureButton2_pressed() -> void:
+	if building == true:
+		new_abc = 1

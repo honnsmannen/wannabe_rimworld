@@ -83,11 +83,29 @@ texture = ExtResource( 1 )
 [node name="Camera2D" type="Camera2D" parent="Navigation2D/Character/sprite"]
 current = true
 
-[node name="Button" type="Button" parent="Navigation2D/Character/sprite/Camera2D"]
-margin_left = -466.0
-margin_top = -199.0
-margin_right = -221.0
-margin_bottom = -164.0
-
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="Navigation2D/Character"]
 avoidance_enabled = true
+
+[node name="Button" type="Button" parent="Navigation2D"]
+margin_left = -488.0
+margin_top = -224.0
+margin_right = -243.0
+margin_bottom = -189.0
+
+[node name="TextureButton" type="TextureButton" parent="Navigation2D"]
+margin_left = -411.0
+margin_top = -284.0
+margin_right = -371.0
+margin_bottom = -244.0
+texture_normal = ExtResource( 2 )
+
+[node name="TextureButton2" type="TextureButton" parent="Navigation2D"]
+margin_left = -458.0
+margin_top = -285.0
+margin_right = -418.0
+margin_bottom = -245.0
+texture_normal = ExtResource( 1 )
+
+[connection signal="pressed" from="Navigation2D/Button" to="Navigation2D" method="_on_Button_pressed"]
+[connection signal="pressed" from="Navigation2D/TextureButton" to="Navigation2D" method="_on_TextureButton_pressed"]
+[connection signal="pressed" from="Navigation2D/TextureButton2" to="Navigation2D" method="_on_TextureButton2_pressed"]
