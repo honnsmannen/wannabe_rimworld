@@ -14,10 +14,10 @@ func _ready() -> void:
 	noise.period = 15
 	
 	noise.octaves = 1
-	for i in 100:
+	for i in 500:
 		cell_x += 1
 		cell_y = 0
-		for j in 100:
+		for j in 500:
 			cell_y += 1
 			
 			var cell_xy = Vector2(cell_x, cell_y)
