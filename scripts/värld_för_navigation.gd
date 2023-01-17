@@ -5,6 +5,9 @@ var compenserat_value = 0
 var test = 0
 var tree_offset = Vector2(32,32)
 var tree_pos := Vector2(0,0)
+
+onready var character = $KinematicBody2D
+
 onready var tree = preload("res://scener/träd.tscn")
 onready var noise = OpenSimplexNoise.new()
 onready var tile = get_node("Navigation2D/TileMap")
@@ -14,10 +17,10 @@ func _ready() -> void:
 	noise.period = 15
 	
 	noise.octaves = 1
-	for i in 500:
+	for i in 50:
 		cell_x += 1
 		cell_y = 0
-		for j in 500:
+		for j in 50:
 			cell_y += 1
 			
 			var cell_xy = Vector2(cell_x, cell_y)
@@ -39,4 +42,7 @@ func _ready() -> void:
 			#tile.set_cellv(cell_xy, int(round(noise.get_noise_2d(cell_x, cell_y))))
 			
 	
-	
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("click"):
+		character.set_navigation_position(get_global_mouse_position())
+		print("shabatjena")
