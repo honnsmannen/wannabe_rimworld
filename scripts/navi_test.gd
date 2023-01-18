@@ -1,5 +1,5 @@
 extends Navigation2D
-
+"""
 onready var cell = null
 onready var new_abc = 0
 onready var tilemap = $TileMap
@@ -82,3 +82,4 @@ func _on_TextureButton_pressed() -> void:
 func _on_TextureButton2_pressed() -> void:
 	if building == true:
 		new_abc = 1
+"""

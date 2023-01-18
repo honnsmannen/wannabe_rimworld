@@ -10,9 +10,14 @@ extents = Vector2( 16, 16 )
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 16, 16 )
 texture = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 16, 16 )
 shape = SubResource( 1 )
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_max_distance = 20.0
+avoidance_enabled = true
+radius = 130.29
