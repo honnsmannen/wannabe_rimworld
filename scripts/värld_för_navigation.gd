@@ -65,15 +65,15 @@ func _process(delta: float) -> void:
 		
 		character.set_navigation_position(get_global_mouse_position())
 		
-		print("shabatjena")
+		#print("shabatjena")
 		
-		print("character.global_position: ", character.global_position)
+		#print("character.global_position: ", character.global_position)
 		
 		
-		print("get_global_mouse_position(): ",get_global_mouse_position())
+		#print("get_global_mouse_position(): ",get_global_mouse_position())
 
 		
-		print("character.set_navigation_position(get_global_mouse_position()): ", character.set_navigation_position(get_global_mouse_position()))
+		#print("character.set_navigation_position(get_global_mouse_position()): ", character.set_navigation_position(get_global_mouse_position()))
 		
 
 func bleh() -> void:

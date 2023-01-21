@@ -8,10 +8,10 @@ var level_scene : Node2D
 
 onready var nav_agent = $NavigationAgent2D
 
-export var nav_agent_radius : float = 15.0
+#export var nav_agent_radius : float = 15.0
 export var nav_optimize_path : bool = false
 export var nav_avoidance_enabled : bool = true
-export var character_speed_multiplier : float = 50.0
+export var character_speed_multiplier : float = 100.0
 
 var velocity : Vector2
 
@@ -39,7 +39,7 @@ func _ready() -> void:
 	nav_agent.connect("velocity_computed", self, "character_velocity_computed")
 	# config nav agent attributes
 	nav_agent.max_speed = character_speed_multiplier
-	nav_agent.radius = nav_agent_radius
+#	nav_agent.radius = nav_agent_radius
 	nav_agent.avoidance_enabled = nav_avoidance_enabled
 
 # init called by parent, inits flow down from parent nodes to create easy parent child references
@@ -76,7 +76,7 @@ func _physics_process(_delta : float) -> void:
 	
 func set_navigation_position(nav_position_to_set : Vector2) -> void:
 	nav_destination = nav_position_to_set
-	print("nav_destination: ", nav_destination)
+	#print("nav_destination: ", nav_destination)
 	
 	# set the new character target location
 	nav_agent.set_target_location(nav_destination)
@@ -84,9 +84,9 @@ func set_navigation_position(nav_position_to_set : Vector2) -> void:
 	# calculate a new map path with the server using character nav agent map and new nav destination
 	character_nav_path = Navigation2DServer.map_get_path(nav_agent.get_navigation_map(), global_position, nav_destination, nav_optimize_path)
 	
-	print("character_nav_path: ", character_nav_path)
+	#print("character_nav_path: ", character_nav_path)
 	
-	print("Navigation2DServer.map_get_path(nav_agent.get_navigation_map(), global_position, nav_destination, nav_optimize_path): " , Navigation2DServer.map_get_path(nav_agent.get_navigation_map(), global_position, nav_destination, nav_optimize_path))
+	#print("Navigation2DServer.map_get_path(nav_agent.get_navigation_map(), global_position, nav_destination, nav_optimize_path): " , Navigation2DServer.map_get_path(nav_agent.get_navigation_map(), global_position, nav_destination, nav_optimize_path))
 	
 	# clear the old real nav path, used for draw function
 	character_real_nav_path.clear()
@@ -117,5 +117,5 @@ func character_velocity_computed(calculated_velocity : Vector2) -> void:
 	else:
 		# if reached target, stand at the closest point in the navigation map
 		global_position = Navigation2DServer.map_get_closest_point(nav_agent.get_navigation_map(), global_position)
-		print(":P")
+		#print(":P")
 
