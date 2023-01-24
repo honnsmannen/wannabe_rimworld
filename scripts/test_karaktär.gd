@@ -8,6 +8,11 @@ var level_scene : Node2D
 
 onready var nav_agent = $NavigationAgent2D
 
+var carrying_item = "tom"
+
+var carrying_an_item = false
+
+
 #export var nav_agent_radius : float = 15.0
 export var nav_optimize_path : bool = false
 export var nav_avoidance_enabled : bool = true
@@ -119,3 +124,19 @@ func character_velocity_computed(calculated_velocity : Vector2) -> void:
 		global_position = Navigation2DServer.map_get_closest_point(nav_agent.get_navigation_map(), global_position)
 		#print(":P")
 
+
+#kod för att plocka upp items
+#viktigt att itemkeys finns i stockpiles Stockpile dictionary
+func item_picked_up(item_key) -> void:
+	if !carrying_an_item:
+		carrying_item = item_key
+		carrying_an_item = true
+		print(item_key)
+	
+	
+#kod för att lämna items
+func item_dropped_off() -> void:
+	if carrying_an_item:
+		carrying_item = "tom"
+		carrying_an_item = false
+		

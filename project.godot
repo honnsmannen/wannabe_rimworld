@@ -14,6 +14,10 @@ config/name="Wannabe Rimworld"
 run/main_scene="res://scener/värld_för_navigation.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+ModerStockpile="*res://scener/moder_stockpile.tscn"
+
 [input]
 
 up={

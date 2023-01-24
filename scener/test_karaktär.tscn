@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://golv.png" type="Texture" id=1]
 [ext_resource path="res://scripts/test_karaktär.gd" type="Script" id=2]
@@ -6,7 +6,10 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 16.0312
 
-[node name="KinematicBody2D" type="KinematicBody2D"]
+[sub_resource type="CircleShape2D" id=2]
+radius = 26.0
+
+[node name="Filur" type="KinematicBody2D" groups=["filurer"]]
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -22,3 +25,8 @@ avoidance_enabled = true
 radius = 23.93
 neighbor_dist = 1726.99
 max_neighbors = 100
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 2 )

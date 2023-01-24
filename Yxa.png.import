@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/vatten.png-e6877181677c44c216196c9ce22a6261.stex"
+path="res://.import/Yxa.png-78905bdc46e796ca22d5a3856fbf7f9f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://vatten.png"
-dest_files=[ "res://.import/vatten.png-e6877181677c44c216196c9ce22a6261.stex" ]
+source_file="res://Yxa.png"
+dest_files=[ "res://.import/Yxa.png-78905bdc46e796ca22d5a3856fbf7f9f.stex" ]
 
 [params]
 
