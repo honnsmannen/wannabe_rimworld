@@ -41,7 +41,7 @@ func _ready() -> void:
 			if int(round(noise.get_noise_2d(cell_x, cell_y))) < 0:
 				compenserat_value = int(round(noise.get_noise_2d(cell_x, cell_y))) * -1
 			#ett lätt sätt att få ut slumpade platser på träd
-			elif randi() % 37 == 1 and compenserat_value != 1:
+			elif randi() % 14 == 1 and compenserat_value != 1:
 				tree_pos = Vector2(cell_xy * 32 - tree_offset)
 				print(tree_pos)
 				var nytree = tree.instance()

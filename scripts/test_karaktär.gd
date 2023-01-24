@@ -13,8 +13,8 @@ var carrying_item = "tom"
 var carrying_an_item = false
 
 
-#export var nav_agent_radius : float = 15.0
-export var nav_optimize_path : bool = false
+export var nav_agent_radius : float = 45.0
+export var nav_optimize_path : bool = true
 export var nav_avoidance_enabled : bool = true
 export var character_speed_multiplier : float = 100.0
 
@@ -126,7 +126,9 @@ func character_velocity_computed(calculated_velocity : Vector2) -> void:
 
 
 #kod för att plocka upp items
-#viktigt att itemkeys finns i stockpiles Stockpile dictionary
+"""
+viktigt att itemkeys finns i moder_stockpiles Stockpile dictionary!!!
+"""
 func item_picked_up(item_key) -> void:
 	if !carrying_an_item:
 		carrying_item = item_key
