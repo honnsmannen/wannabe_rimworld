@@ -1,7 +1,5 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://golv.png" type="Texture" id=1]
-[ext_resource path="res://träd.png" type="Texture" id=2]
 [ext_resource path="res://scripts/filur.gd" type="Script" id=3]
 [ext_resource path="res://vägg.png" type="Texture" id=4]
 [ext_resource path="res://mark.png" type="Texture" id=5]
@@ -21,6 +19,7 @@ outlines = [ PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 ) ]
 points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
 
 [sub_resource type="TileSet" id=7]
+resource_local_to_scene = true
 0/name = "mark.png 0"
 0/texture = ExtResource( 5 )
 0/tex_offset = Vector2( 0, 0 )
@@ -50,8 +49,8 @@ points = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
 1/shape_one_way_margin = 0.0
 1/shapes = [  ]
 1/z_index = 0
-2/name = "träd.png 2"
-2/texture = ExtResource( 2 )
+2/name = "vägg.png 2"
+2/texture = ExtResource( 4 )
 2/tex_offset = Vector2( 0, 0 )
 2/modulate = Color( 1, 1, 1, 1 )
 2/region = Rect2( 0, 0, 32, 32 )
@@ -121,19 +120,19 @@ current = true
 [node name="CanvasLayer" type="CanvasLayer" parent="Character/Camera2D"]
 layer = 4
 
-[node name="avpå vägg" type="TextureButton" parent="Character/Camera2D/CanvasLayer"]
-margin_left = 93.0
-margin_top = 64.0
-margin_right = 133.0
-margin_bottom = 104.0
-texture_normal = ExtResource( 4 )
+[node name="avpå vatten" type="TextureButton" parent="Character/Camera2D/CanvasLayer"]
+margin_left = 82.0
+margin_top = 63.0
+margin_right = 122.0
+margin_bottom = 103.0
+texture_normal = ExtResource( 7 )
 
 [node name="avpå golv" type="TextureButton" parent="Character/Camera2D/CanvasLayer"]
-margin_left = 162.0
-margin_top = 66.0
-margin_right = 202.0
-margin_bottom = 106.0
-texture_normal = ExtResource( 1 )
+margin_left = 160.0
+margin_top = 64.0
+margin_right = 200.0
+margin_bottom = 104.0
+texture_normal = ExtResource( 5 )
 
 [node name="avpå building" type="Button" parent="Character/Camera2D/CanvasLayer"]
 margin_left = 60.0
@@ -141,6 +140,14 @@ margin_top = 124.0
 margin_right = 305.0
 margin_bottom = 159.0
 
-[connection signal="pressed" from="Character/Camera2D/CanvasLayer/avpå vägg" to="Bygga saker" method="_on_avp_vgg_pressed"]
+[node name="avpå vägg" type="TextureButton" parent="Character/Camera2D/CanvasLayer"]
+margin_left = 250.0
+margin_top = 64.0
+margin_right = 290.0
+margin_bottom = 104.0
+texture_normal = ExtResource( 4 )
+
+[connection signal="pressed" from="Character/Camera2D/CanvasLayer/avpå vatten" to="Bygga saker" method="_on_avp_vatten_pressed"]
 [connection signal="pressed" from="Character/Camera2D/CanvasLayer/avpå golv" to="Bygga saker" method="_on_avp_golv_pressed"]
 [connection signal="pressed" from="Character/Camera2D/CanvasLayer/avpå building" to="Bygga saker" method="_on_avp_building_pressed"]
+[connection signal="pressed" from="Character/Camera2D/CanvasLayer/avpå vägg" to="Bygga saker" method="_on_avp_vgg_pressed"]

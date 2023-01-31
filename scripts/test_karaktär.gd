@@ -39,9 +39,9 @@ func _ready() -> void:
 	
 	nav_agent = $NavigationAgent2D
 	# connect nav agent signal callback functions
-	nav_agent.connect("path_changed", self, "character_path_changed")
-	nav_agent.connect("target_reached", self, "character_target_reached_reached")
-	nav_agent.connect("navigation_finished", self, "character_navigation_finished")
+	#nav_agent.connect("path_changed", self, "character_path_changed")
+	#nav_agent.connect("target_reached", self, "character_target_reached_reached")
+	#nav_agent.connect("navigation_finished", self, "character_navigation_finished")
 	nav_agent.connect("velocity_computed", self, "character_velocity_computed")
 	# config nav agent attributes
 	nav_agent.max_speed = character_speed_multiplier
@@ -96,11 +96,6 @@ func set_navigation_position(nav_position_to_set : Vector2) -> void:
 	
 	# clear the old real nav path, used for draw function
 	character_real_nav_path.clear()
-
-
-
-
-
 
 
 

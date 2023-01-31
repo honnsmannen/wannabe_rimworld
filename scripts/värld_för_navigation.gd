@@ -1,12 +1,12 @@
 extends Node2D
 
 
-var cell_x = 0
-var cell_y = 0
+var cell_x = -1
+var cell_y = -1
 var compenserat_value = 0
 var test = 0
 var level_navigation_map
-var tree_offset = Vector2(32,32)
+#var tree_offset = Vector2(32,32)
 var tree_pos := Vector2(0,0)
 
 
@@ -49,7 +49,7 @@ func _ready() -> void:
 				compenserat_value = int(round(noise.get_noise_2d(cell_x, cell_y))) * -1
 			#ett lätt sätt att få ut slumpade platser på träd
 			elif randi() % 14 == 1 and compenserat_value != 1:
-				tree_pos = Vector2(cell_xy * 32 - tree_offset)
+				tree_pos = Vector2(cell_xy * 32)
 				#print(tree_pos)
 				var nytree = tree.instance()
 				nytree.global_position = tree_pos
@@ -148,3 +148,7 @@ func _draw() -> void:
 	if level_camera is Camera2D and is_instance_valid(level_camera) and level_camera.is_inside_tree():
 		draw_line(level_camera.global_position, level_camera.camera_target_position, Color(0.3, 0.7, 0.1, 1.0), false)
 	"""
+
+
+func _on_TextureButton_pressed():
+	pass # Replace with function body.

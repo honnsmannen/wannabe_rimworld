@@ -27,10 +27,10 @@ func _on_Button_pressed() -> void:
 
 
 
-func _on_avp_vgg_pressed():
+func _on_avp_vatten_pressed():
 	if building == true:
 		new_abc = 1
-		print("vägg")
+		print("vatten")
 
 func _on_avp_golv_pressed():
 	if building == true:
@@ -43,3 +43,9 @@ func _on_avp_building_pressed():
 		building = true
 	else:
 		building = false
+
+
+func _on_avp_vgg_pressed():
+	if building == true:
+		new_abc = 2
+		print("vägg")
