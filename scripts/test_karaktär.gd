@@ -12,6 +12,7 @@ var carrying_item = "tom"
 
 var carrying_an_item = false
 
+var item_amount = 0
 
 export var nav_agent_radius : float = 45.0
 export var nav_optimize_path : bool = true
@@ -96,18 +97,14 @@ func set_navigation_position(nav_position_to_set : Vector2) -> void:
 	# clear the old real nav path, used for draw function
 	character_real_nav_path.clear()
 
-func character_path_changed() -> void:
-	# TODO, implement this function to add behavior for character
-	pass
-	
-func character_target_reached_reached() -> void:
-	# TODO, implement this function to add behavior for character
-	# currently using is_target_reached() in character_velocity_computed()
-	pass
-	
-func character_navigation_finished() -> void:
-	# TODO, implement this function to add behavior for character
-	pass
+
+
+
+
+
+
+
+
 	
 func character_velocity_computed(calculated_velocity : Vector2) -> void:
 	velocity = calculated_velocity
@@ -129,16 +126,18 @@ func character_velocity_computed(calculated_velocity : Vector2) -> void:
 """
 viktigt att itemkeys finns i moder_stockpiles Stockpile dictionary!!!
 """
-func item_picked_up(item_key) -> void:
-	if !carrying_an_item:
-		carrying_item = item_key
+func item_picked_up(item_id : String, amount) -> void:
+	if !carrying_an_item or carrying_item == item_id:
+		carrying_item = item_id
+		item_amount += amount
 		carrying_an_item = true
-		print(item_key)
+		print(item_id)
 	
 	
 #kod för att lämna items
 func item_dropped_off() -> void:
 	if carrying_an_item:
+		item_amount = 0
 		carrying_item = "tom"
 		carrying_an_item = false
 		

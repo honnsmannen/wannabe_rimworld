@@ -23,12 +23,19 @@ onready var tree = preload("res://scener/träd.tscn")
 onready var noise = OpenSimplexNoise.new()
 onready var tile = get_node("TileMap")
 func _ready() -> void:
+	level_navigation_map = get_world_2d().get_navigation_map()
+	init_pre_existing_level_characters()
+	
+	
+	"""
+	de här är till för generationen av världen.
+	"""
 	randomize()
 	noise.seed = randi()
 	noise.period = 15
-	level_navigation_map = get_world_2d().get_navigation_map()
+	
 	noise.octaves = 1
-	init_pre_existing_level_characters()
+	
 	for i in 50:
 		cell_x += 1
 		cell_y = 0
@@ -43,7 +50,7 @@ func _ready() -> void:
 			#ett lätt sätt att få ut slumpade platser på träd
 			elif randi() % 14 == 1 and compenserat_value != 1:
 				tree_pos = Vector2(cell_xy * 32 - tree_offset)
-				print(tree_pos)
+				#print(tree_pos)
 				var nytree = tree.instance()
 				nytree.global_position = tree_pos
 				add_child(nytree)
