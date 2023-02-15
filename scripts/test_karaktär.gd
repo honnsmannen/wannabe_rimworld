@@ -10,6 +10,8 @@ onready var nav_agent = $NavigationAgent2D
 
 var carrying_item = "tom"
 
+var follow_player = true
+
 var carrying_an_item = false
 
 var item_amount = 0
@@ -21,6 +23,8 @@ export var character_speed_multiplier : float = 100.0
 
 var velocity : Vector2
 
+
+onready var player = $"../Filuren"
 # final navigation destination position/point
 var nav_destination : Vector2 
 # next navigation destination position/point
@@ -55,20 +59,25 @@ func init_character(parent_level_scene : Node2D, instanced_in_code : bool) -> vo
 	level_scene = parent_level_scene
 	print("hallå")
 	# init positions
+	"""
 	if instanced_in_code:
 		# init position(s) for character existing in the level scene during start
 		#global_position = level_scene.previous_right_mouse_click_global_position
-		nav_destination = level_scene.previous_left_mouse_click_global_position
+		#nav_destination = level_scene.previous_left_mouse_click_global_position
 		#next_nav_position = level_scene.previous_right_mouse_click_global_position
 	else:
 		# init position(s) for character scenes created during play
 		nav_destination = global_position
 		next_nav_position = global_position
-
+"""
 	# set the initial target location to nav_destination
 	nav_agent.set_target_location(nav_destination)
 
 func _physics_process(_delta : float) -> void:
+	
+	if follow_player:
+		nav_agent.set_target_location(player.global_position)
+	
 	# get the next nav position from the character's navigation agent
 	next_nav_position = nav_agent.get_next_location()
 	# add the next nav position to the 'real' path for draw function
@@ -136,3 +145,16 @@ func item_dropped_off() -> void:
 		carrying_item = "tom"
 		carrying_an_item = false
 		
+
+
+func _on_Area2D_body_entered(body: Node) -> void:
+	if body.is_in_group("player"):
+		follow_player = true
+		print("bleh")
+		
+
+
+func _on_Area2D_body_exited(body: Node) -> void:
+	if body.is_in_group("player"):
+		nav_destination = global_position
+		follow_player = false

@@ -8,7 +8,7 @@ radius = 12.0
 height = 0.0
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 26.0
+radius = 405.14
 
 [node name="Filur" type="KinematicBody2D" groups=["filurer"]]
 script = ExtResource( 2 )
@@ -24,6 +24,7 @@ shape = SubResource( 3 )
 path_desired_distance = 32.56
 path_max_distance = 20.0
 avoidance_enabled = true
+max_speed = 3325.0
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2( -10, -1 )
@@ -31,3 +32,6 @@ position = Vector2( -10, -1 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 10, 1 )
 shape = SubResource( 2 )
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]

@@ -63,14 +63,15 @@ func _ready() -> void:
 	
 func _process(delta: float) -> void:
 	update()
+	"""
 	if Input.is_action_just_pressed("click"):
-		Hantera_left_click()
+		
 		var instanced_in_code := true
 		var previous_left_mouse_click_global_position = get_global_mouse_position()
 		#character.init_character(parent_level_scene, instanced_in_code)
 		character.set_navigation_position(get_global_mouse_position())
-		
-		character.set_navigation_position(get_global_mouse_position())
+	"""
+
 		
 		#print("shabatjena")
 		
@@ -82,14 +83,14 @@ func _process(delta: float) -> void:
 		
 		#print("character.set_navigation_position(get_global_mouse_position()): ", character.set_navigation_position(get_global_mouse_position()))
 		
-
+"""
 func Hantera_left_click() -> void:
 	
 	previous_left_mouse_click_global_position = get_global_mouse_position()
 	# set all level characters new navigation position
 	for character in characters:
 		character.set_navigation_position(get_global_mouse_position())
-
+"""
 func init_pre_existing_level_characters() -> void:
 	# init all the character scenes in the scene tree when starting the level
 	# other characters created in create_character() will be initilized at that time
