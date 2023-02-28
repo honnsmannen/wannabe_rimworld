@@ -1,9 +1,6 @@
 extends KinematicBody2D
 
 
-# Author : Shaun Harbison
-# MIT License : 2022
-
 var level_scene : Node2D
 
 onready var nav_agent = $NavigationAgent2D
@@ -20,6 +17,7 @@ export var nav_agent_radius : float = 45.0
 export var nav_optimize_path : bool = true
 export var nav_avoidance_enabled : bool = true
 export var character_speed_multiplier : float = 100.0
+var is_dead := false
 
 var velocity : Vector2
 
@@ -158,3 +156,10 @@ func _on_Area2D_body_exited(body: Node) -> void:
 	if body.is_in_group("player"):
 		nav_destination = global_position
 		follow_player = false
+
+func die() -> void:
+	if not is_dead:
+		is_dead = true
+	pass
+	queue_free()
+

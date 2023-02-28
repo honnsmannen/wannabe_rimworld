@@ -103,7 +103,7 @@ func init_pre_existing_level_characters() -> void:
 				child_node.init_character(self, false)
 				characters.push_back(child_node)
 
-
+"""
 func _draw() -> void:
 	# TODO: draw needs some clean up and has some draw errors
 	# Error: canvas_item_add_polygon: Invalid polygon data, triangulation failed.
@@ -117,7 +117,8 @@ func _draw() -> void:
 						draw_line(previous_line_point, line_point, Color(1.0, 0.3, 0.7, 1.0), 3.0, false)
 						draw_circle(line_point, 4.0, Color(0.1, 5.0, 0.6, 1.0))
 					previous_line_point = line_point
-			
+
+
 			if character.character_real_nav_path.size() > 1:
 				var previous_line_point : Vector2 = character.character_real_nav_path[0]
 				for path_index in range(1, character.character_real_nav_path.size()):
@@ -139,6 +140,7 @@ func _draw() -> void:
 				draw_line(character.global_position, character.global_position + character.velocity, Color(0.3, 0.5, 1.0, 1.0), 3.0, false)
 			draw_circle(character.global_position + character.velocity, 5.0, Color(0.2, 0.5, 0.7, 1.0))
 	"""
+"""
 	for obstacle in obstacles:
 		if obstacle is Node2D and is_instance_valid(obstacle) and obstacle.is_inside_tree():
 			if obstacle.nav_obstacle.estimate_radius:
