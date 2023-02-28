@@ -3,6 +3,17 @@ extends KinematicBody2D
 signal hp_updated(hp)
 signal died()
 
+var carrying_an_item = false
+
+var item_amount = 0
+
+var carrying_item = "tom"
+
+var active_item = "tom"
+
+var temp_item = ""
+
+
 var vapen_scene = preload("res://scener/Vapen.tscn")
 onready var player = $"../Filuren"
 onready var enemy = $"../test_karaktär"
@@ -39,6 +50,13 @@ func get_input():
 func _physics_process(delta):
 	get_input()
 	velocity = move_and_slide(velocity)
+	if Input.is_action_just_pressed("switch_active_item"):
+		active_item_switch()
+		#"""
+		print("active_item: ", active_item)
+		print("carrying_item: ", carrying_item)
+		print("temp_item: ", temp_item)
+		#"""
 
 func damage(dmg_amount):
 	hp -= dmg_amount
@@ -67,3 +85,30 @@ func _on_AttackTimer_timeout() -> void:
 	print("timeout")
 	can_attack = true
 	$AttackTimer.stop()
+	
+	
+func item_picked_up(item_id : String, amount) -> void:
+	if !carrying_an_item or carrying_item == item_id:
+		carrying_item = item_id
+		item_amount += amount
+		carrying_an_item = true
+		print(item_id)
+	
+	
+#kod för att lämna items
+func item_dropped_off() -> void:
+	if carrying_an_item:
+		item_amount = 0
+		carrying_item = "tom"
+		carrying_an_item = false
+
+func active_item_switch() -> void:
+	if active_item == "tom":
+		active_item = carrying_item
+		carrying_item = "tom"
+	else:
+		temp_item = active_item
+		active_item = carrying_item
+		carrying_item = temp_item
+		temp_item = ""
+
