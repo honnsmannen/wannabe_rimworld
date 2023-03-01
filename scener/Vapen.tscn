@@ -4,8 +4,8 @@
 [ext_resource path="res://Vapen.gd" type="Script" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 0.999997
-height = 74.0
+radius = 0.999866
+height = 74.0003
 
 [node name="Vapen" type="Area2D" groups=["Vapen"]]
 script = ExtResource( 2 )

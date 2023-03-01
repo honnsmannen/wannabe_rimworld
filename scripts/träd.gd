@@ -9,7 +9,7 @@ func _ready():
 
 
 func _on_Area2D_body_entered(body: Node) -> void:
-	if body.is_in_group("filur"):
+	if body.is_in_group("player") and body.active_item == "yxa":
 		print("hej")
 		queue_free()
 	

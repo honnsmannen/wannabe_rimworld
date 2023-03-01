@@ -8,6 +8,16 @@
 
 config_version=4
 
+_global_script_classes=[ {
+"base": "CanvasModulate",
+"class": "DayNightCycle",
+"language": "GDScript",
+"path": "res://scener/day_night.gd"
+} ]
+_global_script_class_icons={
+"DayNightCycle": ""
+}
+
 [application]
 
 config/name="Wannabe Rimworld"
