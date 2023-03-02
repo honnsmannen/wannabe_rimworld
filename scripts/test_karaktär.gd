@@ -7,9 +7,10 @@ onready var nav_agent = $NavigationAgent2D
 
 var carrying_item = "tom"
 
-var follow_player = true
+var follow_player = false
 
 var carrying_an_item = false
+onready var player = get_node("/root/värld_för_navigation/Filuren")
 
 var item_amount = 0
 
@@ -21,8 +22,8 @@ var is_dead := false
 
 var velocity : Vector2
 
+onready var parent_level_scene = ("res://scener/värld_för_navigation.tscn")
 
-onready var player = $"../Filuren"
 # final navigation destination position/point
 var nav_destination : Vector2 
 # next navigation destination position/point
@@ -37,6 +38,7 @@ var character_real_nav_path : Array = []
 func _ready() -> void:
 	# init velocity
 	# Vector2.ZERO is enumeration for Vector2(0,0)
+	
 	velocity = Vector2.ZERO 
 	
 	nav_agent = $NavigationAgent2D
@@ -57,25 +59,28 @@ func init_character(parent_level_scene : Node2D, instanced_in_code : bool) -> vo
 	level_scene = parent_level_scene
 	print("hallå")
 	# init positions
-	"""
+
 	if instanced_in_code:
-		# init position(s) for character existing in the level scene during start
-		#global_position = level_scene.previous_right_mouse_click_global_position
-		#nav_destination = level_scene.previous_left_mouse_click_global_position
-		#next_nav_position = level_scene.previous_right_mouse_click_global_position
+		#init position(s) for character existing in the level scene during start
+		global_position = level_scene.previous_right_mouse_click_global_position
+		nav_destination = level_scene.previous_left_mouse_click_global_position
+		next_nav_position = level_scene.previous_right_mouse_click_global_position
 	else:
-		# init position(s) for character scenes created during play
+		#init position(s) for character scenes created during play
 		nav_destination = global_position
 		next_nav_position = global_position
-"""
+		
+
+
 	# set the initial target location to nav_destination
 	nav_agent.set_target_location(nav_destination)
 
 func _physics_process(_delta : float) -> void:
-	
+
 	if follow_player:
 		nav_agent.set_target_location(player.global_position)
-	
+
+
 	# get the next nav position from the character's navigation agent
 	next_nav_position = nav_agent.get_next_location()
 	# add the next nav position to the 'real' path for draw function
@@ -151,7 +156,6 @@ func _on_Area2D_body_entered(body: Node) -> void:
 		print("bleh")
 		
 
-
 func _on_Area2D_body_exited(body: Node) -> void:
 	if body.is_in_group("player"):
 		nav_destination = global_position
@@ -160,6 +164,5 @@ func _on_Area2D_body_exited(body: Node) -> void:
 func die() -> void:
 	if not is_dead:
 		is_dead = true
-	pass
 	queue_free()
 

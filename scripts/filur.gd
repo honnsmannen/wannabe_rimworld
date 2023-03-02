@@ -3,22 +3,15 @@ extends KinematicBody2D
 signal hp_updated(hp)
 signal died()
 
-var carrying_an_item = false
-
-var item_amount = 0
-
-var carrying_item = "tom"
-
-var active_item = "tom"
-
-var temp_item = ""
 
 
-var vapen_scene = preload("res://scener/Vapen.tscn")
-onready var player = $"../Filuren"
-onready var enemy = $"../test_karaktär"
+onready var vapen_scene = preload("res://scener/Vapen.tscn")
+onready var enemy = preload("res://scener/test_karaktär.tscn")
+onready var light = get_node("NightLight")
 export (int) var speed = 200
 onready var hp = max_hp
+
+
 
 var max_hp = 100
 var velocity = Vector2()
@@ -26,7 +19,12 @@ var dmg_amount = 10
 var can_attack := true
 var direction := Vector2.RIGHT
 
-onready var iframe = $IFrame
+var temp_item = ""
+var active_item = "tom"
+var carrying_an_item = false
+var item_amount = 0
+var carrying_item = "tom"
+
 
 func get_input():
 	velocity = Vector2()
@@ -82,7 +80,6 @@ func _shoot() -> void:
 	get_tree().get_root().add_child(vapen_instance)
 
 func _on_AttackTimer_timeout() -> void:
-	print("timeout")
 	can_attack = true
 	$AttackTimer.stop()
 	
@@ -112,3 +109,9 @@ func active_item_switch() -> void:
 		carrying_item = temp_item
 		temp_item = ""
 
+	
+func _on_Day_Night_night_tick(night) -> void:
+	light.show()
+
+func _on_Day_Night_day_tick(day) -> void:
+	light.hide()
