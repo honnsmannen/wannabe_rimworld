@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/vägg.png-604859dc53607f23fb9266c73a16c34f.stex"
+path="res://.import/poäng.png-016f12e41ce570eb13cf0ed953251ea1.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://vägg.png"
-dest_files=[ "res://.import/vägg.png-604859dc53607f23fb9266c73a16c34f.stex" ]
+source_file="res://sprites/poäng.png"
+dest_files=[ "res://.import/poäng.png-016f12e41ce570eb13cf0ed953251ea1.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=false
+flags/filter=true
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

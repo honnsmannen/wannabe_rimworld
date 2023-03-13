@@ -2,6 +2,8 @@ extends KinematicBody2D
 
 signal hp_updated(hp)
 signal died()
+signal damaged(hp)
+signal hunger(hunger)
 
 
 
@@ -11,13 +13,12 @@ onready var light = get_node("NightLight")
 export (int) var speed = 200
 onready var hp = max_hp
 
-
-
 var max_hp = 100
 var velocity = Vector2()
 var dmg_amount = 10
 var can_attack := true
 var direction := Vector2.RIGHT
+var hunger := 100
 
 var temp_item = ""
 var active_item = "tom"
@@ -43,32 +44,37 @@ func get_input():
 	velocity = velocity.normalized() * speed
 	if Input.is_action_pressed("Attack") and can_attack:
 		_shoot()
-	
+	if Input.is_action_just_pressed("activate"):
+		pass
 
-func _physics_process(delta):
-	get_input()
-	velocity = move_and_slide(velocity)
+			
 	if Input.is_action_just_pressed("switch_active_item"):
 		active_item_switch()
-		#"""
+
 		print("active_item: ", active_item)
 		print("carrying_item: ", carrying_item)
 		print("temp_item: ", temp_item)
-		#"""
+	
+func _physics_process(delta):
+	get_input()
+	velocity = move_and_slide(velocity)
 
 func damage(dmg_amount):
 	hp -= dmg_amount
+	emit_signal("damaged", hp)
 	if hp <= 0:
 		died()
 		
 func died():
-	print("dead lmao")
+	queue_free()
+	
 
-func _on_Area2D_body_entered(body: Node) -> void:
+func _on_Zone_body_entered(body: Node) -> void:
 	if body.is_in_group("enemy"):
 		damage(dmg_amount)
 		print(hp)
-		
+
+
 func _shoot() -> void:
 	can_attack = false
 	$AttackTimer.start()
@@ -90,8 +96,8 @@ func item_picked_up(item_id : String, amount) -> void:
 		item_amount += amount
 		carrying_an_item = true
 		print(item_id)
-	
-	
+	emit_signal("item_picked_up", item_id)
+		
 #kod för att lämna items
 func item_dropped_off() -> void:
 	if carrying_an_item:
@@ -108,10 +114,21 @@ func active_item_switch() -> void:
 		active_item = carrying_item
 		carrying_item = temp_item
 		temp_item = ""
-
 	
 func _on_Day_Night_night_tick(night) -> void:
 	light.show()
 
 func _on_Day_Night_day_tick(day) -> void:
 	light.hide()
+
+func _on_HungerTimer_timeout() -> void:
+	hunger = clamp(hunger, 2, 100)
+	hunger -= 1
+	print("hunger: ", hunger)
+	emit_signal("hunger", hunger)
+	if hunger == 0:
+		$DamageTimer.start()
+	
+func _on_DamageTimer_timeout() -> void:
+	damage(dmg_amount)
+	print("damage")

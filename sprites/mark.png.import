@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/träd.png-6294a98a6f22dc41a264362037db2100.stex"
+path="res://.import/mark.png-49ca524dce527b932ba17d986ffac695.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://träd.png"
-dest_files=[ "res://.import/träd.png-6294a98a6f22dc41a264362037db2100.stex" ]
+source_file="res://sprites/mark.png"
+dest_files=[ "res://.import/mark.png-49ca524dce527b932ba17d986ffac695.stex" ]
 
 [params]
 

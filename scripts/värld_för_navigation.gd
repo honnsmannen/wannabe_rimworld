@@ -8,6 +8,7 @@ var test = 0
 var level_navigation_map
 #var tree_offset = Vector2(32,32)
 var tree_pos := Vector2(0,0)
+var bush_pos := Vector2(0,0)
 
 
 var previous_left_mouse_click_global_position : Vector2
@@ -18,7 +19,7 @@ onready var parent_level_scene = ("res://scener/värld_för_navigation.tscn")
 
 var characters = []
 
-
+onready var Bush = preload("res://scener/Bush.tscn")
 onready var tree = preload("res://scener/träd.tscn")
 onready var noise = OpenSimplexNoise.new()
 onready var tile = get_node("TileMap")
@@ -50,10 +51,14 @@ func _ready() -> void:
 			#ett lätt sätt att få ut slumpade platser på träd
 			elif randi() % 14 == 1 and compenserat_value != 1:
 				tree_pos = Vector2(cell_xy * 32)
-				#print(tree_pos)
 				var nytree = tree.instance()
 				nytree.global_position = tree_pos
 				add_child(nytree)
+			elif randi() % 40 == 1 and compenserat_value != 1:
+				bush_pos = Vector2(cell_xy * 32)
+				var nybush = Bush.instance()
+				nybush.global_position = bush_pos
+				add_child(nybush)
 			else:
 				compenserat_value = int(round(noise.get_noise_2d(cell_x, cell_y)))
 			tile.set_cellv(cell_xy, compenserat_value)
@@ -72,17 +77,6 @@ func _process(delta: float) -> void:
 		character.set_navigation_position(get_global_mouse_position())
 	"""
 
-		
-		#print("shabatjena")
-		
-		#print("character.global_position: ", character.global_position)
-		
-		
-		#print("get_global_mouse_position(): ",get_global_mouse_position())
-
-		
-		#print("character.set_navigation_position(get_global_mouse_position()): ", character.set_navigation_position(get_global_mouse_position()))
-		
 """
 func Hantera_left_click() -> void:
 	
@@ -139,7 +133,7 @@ func _draw() -> void:
 			if character.global_position.distance_to(character.velocity) > 2.0:
 				draw_line(character.global_position, character.global_position + character.velocity, Color(0.3, 0.5, 1.0, 1.0), 3.0, false)
 			draw_circle(character.global_position + character.velocity, 5.0, Color(0.2, 0.5, 0.7, 1.0))
-	"""
+"""
 """
 	for obstacle in obstacles:
 		if obstacle is Node2D and is_instance_valid(obstacle) and obstacle.is_inside_tree():
@@ -150,7 +144,7 @@ func _draw() -> void:
 	
 	if level_camera is Camera2D and is_instance_valid(level_camera) and level_camera.is_inside_tree():
 		draw_line(level_camera.global_position, level_camera.camera_target_position, Color(0.3, 0.7, 0.1, 1.0), false)
-	"""
+"""
 
 
 func _on_TextureButton_pressed():

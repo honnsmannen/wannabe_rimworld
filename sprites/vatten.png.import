@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Stockpile.png-d28825cd961d32f1095750d132fd90dc.stex"
+path="res://.import/vatten.png-4cfc658ba78909cf783d7c7b9c369a82.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Stockpile.png"
-dest_files=[ "res://.import/Stockpile.png-d28825cd961d32f1095750d132fd90dc.stex" ]
+source_file="res://sprites/vatten.png"
+dest_files=[ "res://.import/vatten.png-4cfc658ba78909cf783d7c7b9c369a82.stex" ]
 
 [params]
 

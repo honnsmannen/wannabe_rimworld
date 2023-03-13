@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Filur.png-be5281fc2b253e57d295f464a5cd7ff9.stex"
+path="res://.import/vägg.png-7386d1d3bac157d0d4778300145cbac4.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Filur.png"
-dest_files=[ "res://.import/Filur.png-be5281fc2b253e57d295f464a5cd7ff9.stex" ]
+source_file="res://sprites/vägg.png"
+dest_files=[ "res://.import/vägg.png-7386d1d3bac157d0d4778300145cbac4.stex" ]
 
 [params]
 

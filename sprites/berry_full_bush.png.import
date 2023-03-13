@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/rapir.png-59c1a949dce02f8327c47bb69c3db3b4.stex"
+path="res://.import/berry_full_bush.png-5adc35f8e3ba746ef84458f7d3b232ac.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://rapir.png"
-dest_files=[ "res://.import/rapir.png-59c1a949dce02f8327c47bb69c3db3b4.stex" ]
+source_file="res://sprites/berry_full_bush.png"
+dest_files=[ "res://.import/berry_full_bush.png-5adc35f8e3ba746ef84458f7d3b232ac.stex" ]
 
 [params]
 
@@ -31,5 +31,5 @@ process/invert_color=false
 process/normal_map_invert_y=false
 stream=false
 size_limit=0
-detect_3d=false
+detect_3d=true
 svg/scale=1.0

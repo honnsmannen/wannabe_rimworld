@@ -7,16 +7,18 @@ const HEIGHT = 600
 var enemy_scene = preload("res://scener/test_karaktär.tscn")
 
 onready var player = get_parent().get_node("Filuren")
-var can_spawn_enemy = true
+var can_spawn_enemy = false
 func _ready() -> void:
 	randomize()
 	$Timer.wait_time = 3 + rand_range(-2, 2)
 	
-"""
-func _can_spawn_enemy() -> bool:
-	var number_of_enemies = len(get_tree().get_nodes_in_group("Enemy"))
-	return number_of_enemies <= 20
-"""
+func num_of_enemies(num) -> int:
+	num = len(get_tree().get_nodes_in_group("enemy"))
+	return num <= 15
+	
+	
+
+
 func _spawn_enemy() -> void:
 	var enemy = enemy_scene.instance()
 	var section = randi() % 4
@@ -32,7 +34,8 @@ func _spawn_enemy() -> void:
 	
 
 func _on_Timer_timeout() -> void:
-	if can_spawn_enemy:
+	var num = 0
+	if can_spawn_enemy and num_of_enemies(num):
 		_spawn_enemy()
 		print("spawn")
 		$Timer.wait_time = 3 + rand_range(-2, 2)

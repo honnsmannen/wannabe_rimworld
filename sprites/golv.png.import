@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/vatten.png-e6877181677c44c216196c9ce22a6261.stex"
+path="res://.import/golv.png-fbaac43dc69c0cec5a362020e673dccc.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://vatten.png"
-dest_files=[ "res://.import/vatten.png-e6877181677c44c216196c9ce22a6261.stex" ]
+source_file="res://sprites/golv.png"
+dest_files=[ "res://.import/golv.png-fbaac43dc69c0cec5a362020e673dccc.stex" ]
 
 [params]
 

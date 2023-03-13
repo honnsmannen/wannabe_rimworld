@@ -12,7 +12,7 @@ _global_script_classes=[ {
 "base": "CanvasModulate",
 "class": "DayNightCycle",
 "language": "GDScript",
-"path": "res://scener/day_night.gd"
+"path": "res://scripts/day_night.gd"
 } ]
 _global_script_class_icons={
 "DayNightCycle": ""
@@ -22,7 +22,7 @@ _global_script_class_icons={
 
 config/name="Wannabe Rimworld"
 run/main_scene="res://scener/värld_för_navigation.tscn"
-config/icon="res://icon.png"
+config/icon="res://sprites/icon.png"
 
 [autoload]
 
@@ -63,6 +63,11 @@ Attack={
 switch_active_item={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":81,"unicode":0,"echo":false,"script":null)
+ ]
+}
+activate={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":32,"unicode":0,"echo":false,"script":null)
  ]
 }
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Yxa.png-78905bdc46e796ca22d5a3856fbf7f9f.stex"
+path="res://.import/Stockpile.png-473e82316fa9742ad3fdcd97e3730515.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Yxa.png"
-dest_files=[ "res://.import/Yxa.png-78905bdc46e796ca22d5a3856fbf7f9f.stex" ]
+source_file="res://sprites/Stockpile.png"
+dest_files=[ "res://.import/Stockpile.png-473e82316fa9742ad3fdcd97e3730515.stex" ]
 
 [params]
 

@@ -1,10 +1,10 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scripts/träd.gd" type="Script" id=1]
-[ext_resource path="res://träd.png" type="Texture" id=2]
+[ext_resource path="res://sprites/träd.png" type="Texture" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 16.0
+radius = 17.0294
 
 [node name="RigidBody2D" type="RigidBody2D"]
 mode = 1
@@ -13,6 +13,7 @@ gravity_scale = 0.0
 script = ExtResource( 1 )
 
 [node name="Area2D" type="Area2D" parent="."]
+scale = Vector2( 1.2, 1.2 )
 
 [node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="Area2D"]
 estimate_radius = false
