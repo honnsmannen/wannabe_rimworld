@@ -8,7 +8,7 @@ signal hunger(hunger)
 
 
 onready var vapen_scene = preload("res://scener/Vapen.tscn")
-onready var enemy = preload("res://scener/test_karaktär.tscn")
+onready var enemy = preload("res://scener/fiender.tscn")
 onready var light = get_node("NightLight")
 export (int) var speed = 200
 onready var hp = max_hp
@@ -44,6 +44,9 @@ func get_input():
 	velocity = velocity.normalized() * speed
 	if Input.is_action_pressed("Attack") and can_attack:
 		_shoot()
+		$AudioStreamPlayer.playing = true
+	
+		
 	if Input.is_action_just_pressed("activate"):
 		pass
 
@@ -132,3 +135,6 @@ func _on_HungerTimer_timeout() -> void:
 func _on_DamageTimer_timeout() -> void:
 	damage(dmg_amount)
 	print("damage")
+
+
+

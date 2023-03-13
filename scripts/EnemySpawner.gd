@@ -4,13 +4,15 @@ extends Node
 const WIDTH = 1024
 const HEIGHT = 600
 
-var enemy_scene = preload("res://scener/test_karaktär.tscn")
+var enemy_scene = preload("res://scener/fiender.tscn")
 
 onready var player = get_parent().get_node("Filuren")
 var can_spawn_enemy = false
 func _ready() -> void:
 	randomize()
 	$Timer.wait_time = 3 + rand_range(-2, 2)
+	
+
 	
 func num_of_enemies(num) -> int:
 	num = len(get_tree().get_nodes_in_group("enemy"))
@@ -48,3 +50,4 @@ func _on_Day_Night_night_tick(night) -> void:
 func _on_Day_Night_day_tick(day) -> void:
 	can_spawn_enemy = false
 	print("day")
+

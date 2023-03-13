@@ -9,7 +9,7 @@
 [ext_resource path="res://sprites/vatten.png" type="Texture" id=7]
 [ext_resource path="res://scripts/värld_för_navigation.gd" type="Script" id=8]
 [ext_resource path="res://scener/Stockpiles.tscn" type="PackedScene" id=10]
-[ext_resource path="res://scener/test_karaktär.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scener/fiender.tscn" type="PackedScene" id=11]
 [ext_resource path="res://scener/träd.tscn" type="PackedScene" id=12]
 
 [sub_resource type="NavigationPolygon" id=5]

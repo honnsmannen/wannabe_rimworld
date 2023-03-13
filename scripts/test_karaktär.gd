@@ -129,40 +129,21 @@ func character_velocity_computed(calculated_velocity : Vector2) -> void:
 		#print(":P")
 
 
-#kod för att plocka upp items
-"""
-viktigt att itemkeys finns i moder_stockpiles Stockpile dictionary!!!
-"""
-func item_picked_up(item_id : String, amount) -> void:
-	if !carrying_an_item or carrying_item == item_id:
-		carrying_item = item_id
-		item_amount += amount
-		carrying_an_item = true
-		print(item_id)
-	
-	
-#kod för att lämna items
-func item_dropped_off() -> void:
-	if carrying_an_item:
-		item_amount = 0
-		carrying_item = "tom"
-		carrying_an_item = false
-		
 
-
-func _on_Area2D_body_entered(body: Node) -> void:
-	if body.is_in_group("player"):
-		follow_player = true
-		print("bleh")
-		
-
-func _on_Area2D_body_exited(body: Node) -> void:
-	if body.is_in_group("player"):
-		nav_destination = global_position
-		follow_player = false
 
 func die() -> void:
 	if not is_dead:
 		is_dead = true
 	queue_free()
 
+func _on_Area2D_body_entered(body: Node) -> void:
+	if body.is_in_group("player"):
+		follow_player = true
+		$AudioStreamPlayer.playing = true
+		
+
+func _on_Area2D_body_exited(body: Node) -> void:
+	if body.is_in_group("player"):
+		nav_destination = global_position
+		follow_player = false
+		$AudioStreamPlayer.playing = false

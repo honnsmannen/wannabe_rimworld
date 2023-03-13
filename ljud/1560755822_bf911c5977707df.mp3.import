@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/1560755822_bf911c5977707df.mp3-beeb603c7688ae47211c0fe0a0d3f479.mp3str"
+
+[deps]
+
+source_file="res://ljud/1560755822_bf911c5977707df.mp3"
+dest_files=[ "res://.import/1560755822_bf911c5977707df.mp3-beeb603c7688ae47211c0fe0a0d3f479.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0
