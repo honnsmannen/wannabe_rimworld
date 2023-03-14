@@ -14,6 +14,7 @@ var tree_list = []
 
 var generating = true
 var current_tiles = []
+var not_cleared = false
 
 var previous_left_mouse_click_global_position : Vector2
 var previous_right_mouse_click_global_position : Vector2
@@ -43,7 +44,7 @@ func _ready() -> void:
 	
 	noise.octaves = 1
 
-	
+
 func _process(delta: float) -> void:
 	update()
 	world_gen(40, 40)
@@ -68,7 +69,7 @@ func world_gen(width: int, height: int) -> void:
 	for x in range(start_x, start_x + width):
 		for y in range(start_y, start_y + height):
 			if Vector2(x,y) in current_tiles:
-				pass	
+				generating = false
 			
 			# Generate world data at (x, y)
 			else:
@@ -103,10 +104,13 @@ func world_gen(width: int, height: int) -> void:
 				$TileMap.set_cell(x, y, int(compenserat_value))
 				current_tiles.append(Vector2(x,y))
 				if current_tiles.size() > width * height:
-					current_tiles.remove(0)
-				print("generating")
-				#fixa så att den tar bort den tile som är längst bort från splearen
 					
+					_distance_from_2020(current_tiles)
+					
+				#print("generating")
+				generating = true
+				#fixa så att den tar bort den tile som är längst bort från splearen
+
 
 func _world_destruction(width , height) -> void:
 	var center = filuren.global_position
@@ -114,8 +118,21 @@ func _world_destruction(width , height) -> void:
 	var start_y = int(center.y / 32) - height/2
 	for x in range(start_x, start_x + width):
 		for y in range(start_y, start_y + height):
+			
+			
 			if Vector2(x,y) in current_tiles:
 				pass
-			else:	
+			else:
 				$TileMap.set_cell(x, y, -1)
-		
+				not_cleared = true
+
+func _distance_from_2020(input_array : Array) -> void:
+	var array_to_compare = input_array 
+	if !generating and not_cleared:
+		for i in range(1600,0,-1):
+			
+			var compared_array = Vector2(20,20) - array_to_compare[i]
+			if compared_array.x > 15 or compared_array.x < -15 or compared_array.y > 15 or compared_array.y < -15:
+				current_tiles.erase(array_to_compare[i-1])
+		not_cleared = false
+

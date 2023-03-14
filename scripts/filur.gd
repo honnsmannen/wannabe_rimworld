@@ -57,7 +57,10 @@ func get_input():
 		print("active_item: ", active_item)
 		print("carrying_item: ", carrying_item)
 		print("temp_item: ", temp_item)
-	
+	if Input.is_action_just_pressed("ui_down"):
+		$Camera2D.zoom = $Camera2D.zoom - Vector2(0.1,0.1)
+	if Input.is_action_just_pressed("ui_up"):
+		$Camera2D.zoom = $Camera2D.zoom + Vector2(0.1,0.1)
 func _physics_process(delta):
 	get_input()
 	velocity = move_and_slide(velocity)
