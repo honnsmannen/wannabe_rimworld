@@ -21,12 +21,13 @@ _global_script_class_icons={
 [application]
 
 config/name="Wannabe Rimworld"
-run/main_scene="res://scener/värld_för_navigation.tscn"
+run/main_scene="res://scener/hem_skärm.tscn"
 config/icon="res://sprites/icon.png"
 
 [autoload]
 
 ModerStockpile="*res://scener/moder_stockpile.tscn"
+MainTheme="*res://main_theme.tscn"
 
 [input]
 

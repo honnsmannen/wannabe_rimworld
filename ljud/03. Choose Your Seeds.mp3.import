@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/03. Choose Your Seeds.mp3-1de6a08660038e1f8f5482eecb356899.mp3str"
+
+[deps]
+
+source_file="res://ljud/03. Choose Your Seeds.mp3"
+dest_files=[ "res://.import/03. Choose Your Seeds.mp3-1de6a08660038e1f8f5482eecb356899.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0

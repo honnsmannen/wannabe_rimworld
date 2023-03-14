@@ -12,7 +12,8 @@ var bush_pos := Vector2(0,0)
 var not_tree_list = []
 var tree_list = []
 
-
+var generating = true
+var current_tiles = []
 
 var previous_left_mouse_click_global_position : Vector2
 var previous_right_mouse_click_global_position : Vector2
@@ -46,6 +47,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	update()
 	world_gen(40, 40)
+	_world_destruction(60,60)
 func init_pre_existing_level_characters() -> void:
 	# init all the character scenes in the scene tree when starting the level
 	# other characters created in create_character() will be initilized at that time
@@ -59,40 +61,61 @@ func init_pre_existing_level_characters() -> void:
 				characters.push_back(child_node)
 
 func world_gen(width: int, height: int) -> void:
+	
 	var center = filuren.global_position
 	var start_x = int(center.x / 32) - width/2
 	var start_y = int(center.y / 32) - height/2
 	for x in range(start_x, start_x + width):
 		for y in range(start_y, start_y + height):
+			if Vector2(x,y) in current_tiles:
+				pass	
 			
 			# Generate world data at (x, y)
-			var noise_x = x
-			var noise_y = y
-			var noise_value = noise.get_noise_2d(noise_x, noise_y)
-			
-			"""
-			den kommande biten skrev jag
-			"""
-			if noise_value < 0:
-				compenserat_value = int(round(noise_value)) * -1
-
 			else:
-				compenserat_value = int(round(noise_value))
-			
-			if not randi() % 14 == 1 and compenserat_value != 1:
-				if not Vector2(x,y) in not_tree_list:
-					not_tree_list.append(Vector2(x,y))
-			
-			elif randi() % 14 == 1 and compenserat_value != 1:
-				if not Vector2(x,y) in tree_list and not Vector2(x,y) in not_tree_list:
-					tree_pos = Vector2(x * 32, y * 32)
-					tree_list.append(Vector2(x,y))
-					print(tree_list)
-					var nytree = tree.instance()
-					nytree.global_position = tree_pos
-					add_child(nytree)
-			
-				
-			
-			$TileMap.set_cell(x, y, int(compenserat_value))
+				var noise_x = x
+				var noise_y = y
+				var noise_value = noise.get_noise_2d(noise_x, noise_y)
+					
+				"""
+				den kommande biten skrev jag
+				"""
+				if noise_value < 0:
+					compenserat_value = int(round(noise_value)) * -1
 
+				else:
+					compenserat_value = int(round(noise_value))
+					
+				if not randi() % 14 == 1 and compenserat_value != 1:
+					if not Vector2(x,y) in not_tree_list:
+						not_tree_list.append(Vector2(x,y))
+					
+				elif randi() % 14 == 1 and compenserat_value != 1:
+					if not Vector2(x,y) in tree_list and not Vector2(x,y) in not_tree_list:
+						tree_pos = Vector2(x * 32, y * 32)
+						tree_list.append(Vector2(x,y))
+						#print(tree_list)
+						var nytree = tree.instance()
+						nytree.global_position = tree_pos
+						add_child(nytree)
+					
+					
+				
+				$TileMap.set_cell(x, y, int(compenserat_value))
+				current_tiles.append(Vector2(x,y))
+				if current_tiles.size() > width * height:
+					current_tiles.remove(0)
+				print("generating")
+				#fixa så att den tar bort den tile som är längst bort från splearen
+					
+
+func _world_destruction(width , height) -> void:
+	var center = filuren.global_position
+	var start_x = int(center.x / 32) - width/2
+	var start_y = int(center.y / 32) - height/2
+	for x in range(start_x, start_x + width):
+		for y in range(start_y, start_y + height):
+			if Vector2(x,y) in current_tiles:
+				pass
+			else:	
+				$TileMap.set_cell(x, y, -1)
+		
