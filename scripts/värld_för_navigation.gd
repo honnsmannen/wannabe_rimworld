@@ -29,6 +29,7 @@ var characters = []
 onready var Bush = preload("res://scener/Bush.tscn")
 onready var tree = preload("res://scener/träd.tscn")
 onready var noise = OpenSimplexNoise.new()
+onready var tree_noise = OpenSimplexNoise.new()
 onready var tile = get_node("TileMap")
 func _ready() -> void:
 	level_navigation_map = get_world_2d().get_navigation_map()
@@ -43,6 +44,14 @@ func _ready() -> void:
 	noise.period = 15
 	
 	noise.octaves = 1
+	
+	tree_noise.seed = randi() * 2
+	
+	tree_noise.period = 1
+	
+	tree_noise.octaves = 100
+	
+	
 
 
 func _process(delta: float) -> void:
@@ -76,17 +85,26 @@ func world_gen(width: int, height: int) -> void:
 				var noise_x = x
 				var noise_y = y
 				var noise_value = noise.get_noise_2d(noise_x, noise_y)
-					
-				"""
-				den kommande biten skrev jag
-				"""
+				
+				var tree_noise_value = int(round(tree_noise.get_noise_2d(noise_x, noise_y)))
+				
 				if noise_value < 0:
 					compenserat_value = int(round(noise_value)) * -1
 
 				else:
 					compenserat_value = int(round(noise_value))
-					
-				if not randi() % 14 == 1 and compenserat_value != 1:
+				
+				
+				if tree_noise_value == 1 and not Vector2(x,y) in tree_list:
+					tree_pos = Vector2(x * 32, y * 32)
+					tree_list.append(Vector2(x,y))
+					#print(tree_list)
+					var nytree = tree.instance()
+					nytree.global_position = tree_pos
+					add_child(nytree)
+				
+				"""
+				if not randi() % 14 == 1 and compenserat_value != 1 and generating:
 					if not Vector2(x,y) in not_tree_list:
 						not_tree_list.append(Vector2(x,y))
 					
@@ -98,7 +116,7 @@ func world_gen(width: int, height: int) -> void:
 						var nytree = tree.instance()
 						nytree.global_position = tree_pos
 						add_child(nytree)
-					
+				"""
 					
 				
 				$TileMap.set_cell(x, y, int(compenserat_value))
