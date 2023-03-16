@@ -72,7 +72,8 @@ func damage(dmg_amount):
 		died()
 		
 func died():
-	queue_free()
+	visible = false
+	emit_signal("died")
 	
 
 func _on_Zone_body_entered(body: Node) -> void:

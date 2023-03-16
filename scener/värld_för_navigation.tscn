@@ -182,6 +182,7 @@ cell_size = Vector2( 32, 32 )
 format = 1
 
 [connection signal="damaged" from="Filuren" to="HUD" method="_on_Filuren_damaged"]
+[connection signal="died" from="Filuren" to="." method="_on_Filuren_died"]
 [connection signal="hunger" from="Filuren" to="HUD" method="_on_Filuren_hunger"]
 [connection signal="day_tick" from="Day_Night" to="Filuren" method="_on_Day_Night_day_tick"]
 [connection signal="day_tick" from="Day_Night" to="Enemy_Spawner" method="_on_Day_Night_day_tick"]

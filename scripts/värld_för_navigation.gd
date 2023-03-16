@@ -23,6 +23,8 @@ onready var character = $KinematicBody2D
 onready var parent_level_scene = ("res://scener/värld_för_navigation.tscn")
 onready var filuren = $Filuren
 
+onready var game_over = preload("res://scener/Game_Over.tscn")
+
 
 var characters = []
 
@@ -103,20 +105,7 @@ func world_gen(width: int, height: int) -> void:
 					nytree.global_position = tree_pos
 					add_child(nytree)
 				
-				"""
-				if not randi() % 14 == 1 and compenserat_value != 1 and generating:
-					if not Vector2(x,y) in not_tree_list:
-						not_tree_list.append(Vector2(x,y))
-					
-				elif randi() % 14 == 1 and compenserat_value != 1:
-					if not Vector2(x,y) in tree_list and not Vector2(x,y) in not_tree_list:
-						tree_pos = Vector2(x * 32, y * 32)
-						tree_list.append(Vector2(x,y))
-						#print(tree_list)
-						var nytree = tree.instance()
-						nytree.global_position = tree_pos
-						add_child(nytree)
-				"""
+
 					
 				
 				$TileMap.set_cell(x, y, int(compenserat_value))
@@ -154,3 +143,7 @@ func _distance_from_2020(input_array : Array) -> void:
 				current_tiles.erase(array_to_compare[i-1])
 		not_cleared = false
 
+
+
+func _on_Filuren_died() -> void:
+	add_child(game_over.instance())
