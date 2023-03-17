@@ -58,8 +58,8 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	update()
-	world_gen(40, 40)
-	_world_destruction(45,45)
+	world_gen(40, 20)
+	_world_destruction(45,25)
 func init_pre_existing_level_characters() -> void:
 	# init all the character scenes in the scene tree when starting the level
 	# other characters created in create_character() will be initilized at that time
@@ -112,7 +112,7 @@ func world_gen(width: int, height: int) -> void:
 				current_tiles.append(Vector2(x,y))
 				if current_tiles.size() > width * height:
 					
-					_distance_from_2020(current_tiles)
+					_distance_from_2020(current_tiles, width, height)
 					
 				#print("generating")
 				generating = true
@@ -133,12 +133,12 @@ func _world_destruction(width , height) -> void:
 				$TileMap.set_cell(x, y, -1)
 				not_cleared = true
 
-func _distance_from_2020(input_array : Array) -> void:
+func _distance_from_2020(input_array : Array,x : int, y : int) -> void:
 	var array_to_compare = input_array 
 	if !generating and not_cleared:
-		for i in range(1600,0,-1):
+		for i in range(x*y,0,-1):
 			
-			var compared_array = Vector2(20,20) - array_to_compare[i]
+			var compared_array = Vector2(x/2,y/2) - array_to_compare[i]
 			if compared_array.x > 15 or compared_array.x < -15 or compared_array.y > 15 or compared_array.y < -15:
 				current_tiles.erase(array_to_compare[i-1])
 		not_cleared = false

@@ -27,7 +27,7 @@ config/icon="res://sprites/icon.png"
 [autoload]
 
 ModerStockpile="*res://scener/moder_stockpile.tscn"
-MainTheme="*res://main_theme.tscn"
+MainTheme="*res://scener/main_theme.tscn"
 
 [input]
 
