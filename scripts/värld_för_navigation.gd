@@ -59,7 +59,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	update()
 	world_gen(40, 40)
-	_world_destruction(60,60)
+	_world_destruction(45,45)
 func init_pre_existing_level_characters() -> void:
 	# init all the character scenes in the scene tree when starting the level
 	# other characters created in create_character() will be initilized at that time

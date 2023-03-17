@@ -3,7 +3,7 @@
 [ext_resource path="res://sprites/nyttspel.png" type="Texture" id=1]
 [ext_resource path="res://sprites/avsluta.png" type="Texture" id=2]
 [ext_resource path="res://scripts/hem_skärm.gd" type="Script" id=3]
-[ext_resource path="res://scener/C3B527A4-F102-495A-BAE2-2A383AC8F47A.jpg" type="Texture" id=4]
+[ext_resource path="res://sprites/C3B527A4-F102-495A-BAE2-2A383AC8F47A.jpg" type="Texture" id=4]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 3 )
