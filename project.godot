@@ -13,21 +13,71 @@ _global_script_classes=[ {
 "class": "DayNightCycle",
 "language": "GDScript",
 "path": "res://scripts/day_night.gd"
+}, {
+"base": "Inventory_Slot",
+"class": "Equipment_Slot",
+"language": "GDScript",
+"path": "res://ui/equipment_slot.gd"
+}, {
+"base": "NinePatchRect",
+"class": "Hotbar",
+"language": "GDScript",
+"path": "res://ui/hotbar.gd"
+}, {
+"base": "Inventory_Slot",
+"class": "Hotbar_Slot",
+"language": "GDScript",
+"path": "res://ui/hotbar_slot.gd"
+}, {
+"base": "NinePatchRect",
+"class": "Inventory",
+"language": "GDScript",
+"path": "res://Inventory/Inventory.gd"
+}, {
+"base": "TextureRect",
+"class": "Inventory_Slot",
+"language": "GDScript",
+"path": "res://Inventory/inventory_slot.gd"
+}, {
+"base": "TextureRect",
+"class": "Item",
+"language": "GDScript",
+"path": "res://items/Item.gd"
+}, {
+"base": "Node",
+"class": "Resource_Manager",
+"language": "GDScript",
+"path": "res://Managers/resource_manager.gd"
 } ]
 _global_script_class_icons={
-"DayNightCycle": ""
+"DayNightCycle": "",
+"Equipment_Slot": "",
+"Hotbar": "",
+"Hotbar_Slot": "",
+"Inventory": "",
+"Inventory_Slot": "",
+"Item": "",
+"Resource_Manager": ""
 }
 
 [application]
 
 config/name="Wannabe Rimworld"
-run/main_scene="res://scener/hem_skärm.tscn"
+run/main_scene="res://scener/värld_för_navigation.tscn"
 config/icon="res://sprites/icon.png"
 
 [autoload]
 
+ItemManager="*res://Managers/item_manager.gd"
+ResourceManager="*res://Managers/resource_manager.gd"
+SignalManager="*res://Managers/signal_manager.gd"
 ModerStockpile="*res://scener/moder_stockpile.tscn"
 MainTheme="*res://main_theme.tscn"
+
+[display]
+
+window/stretch/mode="2d"
+window/stretch/aspect="keep"
 
 [input]
 
@@ -69,6 +119,36 @@ switch_active_item={
 activate={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":32,"unicode":0,"echo":false,"script":null)
+ ]
+}
+hotbar_1={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":49,"unicode":0,"echo":false,"script":null)
+ ]
+}
+hotbar_2={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":50,"unicode":0,"echo":false,"script":null)
+ ]
+}
+hotbar_3={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":51,"unicode":0,"echo":false,"script":null)
+ ]
+}
+hotbar_4={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":52,"unicode":0,"echo":false,"script":null)
+ ]
+}
+hotbar_5={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":53,"unicode":0,"echo":false,"script":null)
+ ]
+}
+eat={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":69,"unicode":0,"echo":false,"script":null)
  ]
 }
 

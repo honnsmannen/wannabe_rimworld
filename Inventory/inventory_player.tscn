@@ -1,0 +1,86 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://inventory/inventory_player.gd" type="Script" id=1]
+[ext_resource path="res://sprites/x_hover.png" type="Texture" id=4]
+[ext_resource path="res://sprites/main panel.png" type="Texture" id=6]
+[ext_resource path="res://sprites/x_pressed.png" type="Texture" id=7]
+[ext_resource path="res://sprites/x_disabled.png" type="Texture" id=8]
+[ext_resource path="res://sprites/x_normal.png" type="Texture" id=9]
+[ext_resource path="res://sprites/title.png" type="Texture" id=10]
+[ext_resource path="res://font/Arcadepix Plus.ttf" type="DynamicFontData" id=11]
+[ext_resource path="res://inventory/inventory.tscn" type="PackedScene" id=13]
+
+[sub_resource type="DynamicFont" id=1]
+size = 14
+font_data = ExtResource( 11 )
+
+[node name="inventory_player" type="NinePatchRect"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -72.0
+margin_top = -58.0
+margin_right = 72.0
+mouse_filter = 1
+texture = ExtResource( 6 )
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+script = ExtResource( 1 )
+player_inventory = NodePath("inventory_container/player_inventory")
+
+[node name="title" type="NinePatchRect" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -61.0
+margin_top = -11.0
+margin_right = 61.0
+margin_bottom = 7.0
+mouse_filter = 1
+texture = ExtResource( 10 )
+patch_margin_left = 8
+patch_margin_top = 6
+patch_margin_right = 8
+patch_margin_bottom = 2
+
+[node name="Label" type="Label" parent="title"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 4.0
+custom_colors/font_color = Color( 0.301961, 0.34902, 0.4, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "Player's Inventory"
+align = 1
+valign = 1
+
+[node name="close" type="TextureButton" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -9.0
+margin_bottom = 9.0
+texture_normal = ExtResource( 9 )
+texture_pressed = ExtResource( 7 )
+texture_hover = ExtResource( 4 )
+texture_disabled = ExtResource( 8 )
+
+[node name="inventory_container" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 9.0
+margin_top = 10.0
+margin_right = -9.0
+margin_bottom = -5.0
+custom_constants/separation = 2
+
+[node name="player_inventory" parent="inventory_container" instance=ExtResource( 13 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 126.0
+margin_bottom = 16.0
+inventory_name = "inventory"
+
+[connection signal="pressed" from="close" to="." method="_on_close_pressed"]

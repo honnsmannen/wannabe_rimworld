@@ -5,7 +5,8 @@ signal died()
 signal damaged(hp)
 signal hunger(hunger)
 
-
+export( NodePath ) onready var zone = get_node(zone) as Area2D
+export( NodePath ) onready var interact_labels = get_node( interact_labels ) as Control
 
 onready var vapen_scene = preload("res://scener/Vapen.tscn")
 onready var enemy = preload("res://scener/fiender.tscn")
@@ -25,6 +26,10 @@ var active_item = "tom"
 var carrying_an_item = false
 var item_amount = 0
 var carrying_item = "tom"
+var current_interactable
+
+func _ready():
+	SignalManager.connect( "item_dropped", self, "_on_item_dropped" )
 
 
 func get_input():
@@ -44,15 +49,14 @@ func get_input():
 	velocity = velocity.normalized() * speed
 	if Input.is_action_pressed("Attack") and can_attack:
 		_shoot()
-		$AudioStreamPlayer.playing = true
-	
+		#$AudioStreamPlayer.playing = true
+	if Input.is_action_pressed( "activate" ) and current_interactable:
+		current_interactable.interact()
 		
-	if Input.is_action_just_pressed("activate"):
-		pass
-
 			
 	if Input.is_action_just_pressed("switch_active_item"):
 		active_item_switch()
+	if Input.is_action_pressed( "eat" ) and current_interactable:
 
 		print("active_item: ", active_item)
 		print("carrying_item: ", carrying_item)
@@ -61,6 +65,9 @@ func get_input():
 func _physics_process(delta):
 	get_input()
 	velocity = move_and_slide(velocity)
+	
+func _process( _delta ):
+	pass
 
 func damage(dmg_amount):
 	hp -= dmg_amount
@@ -75,7 +82,7 @@ func died():
 func _on_Zone_body_entered(body: Node) -> void:
 	if body.is_in_group("enemy"):
 		damage(dmg_amount)
-		print(hp)
+
 
 
 func _shoot() -> void:
@@ -99,7 +106,7 @@ func item_picked_up(item_id : String, amount) -> void:
 		item_amount += amount
 		carrying_an_item = true
 		print(item_id)
-	emit_signal("item_picked_up", item_id)
+		SignalManager.emit_signal("item_picked", item_id)
 		
 #kod för att lämna items
 func item_dropped_off() -> void:
@@ -127,14 +134,34 @@ func _on_Day_Night_day_tick(day) -> void:
 func _on_HungerTimer_timeout() -> void:
 	hunger = clamp(hunger, 2, 100)
 	hunger -= 1
-	print("hunger: ", hunger)
 	emit_signal("hunger", hunger)
 	if hunger == 0:
 		$DamageTimer.start()
 	
 func _on_DamageTimer_timeout() -> void:
 	damage(dmg_amount)
-	print("damage")
 
 
+func _on_item_dropped( item ):
+	var floor_item = ResourceManager.tscn.floor_item.instance()
+	floor_item.item = item
+	get_parent().add_child( floor_item )
+	floor_item.position = position
 
+
+func _on_Zone_area_exited(area: Area2D) -> void:
+	if current_interactable == area:
+		if current_interactable.has_method( "out_of_range" ):
+			current_interactable.out_of_range()
+		
+		interact_labels.hide()
+		current_interactable = null
+
+
+func _on_Zone_area_entered(area: Area2D) -> void:
+	if not current_interactable:
+		var overlapping_area = zone.get_overlapping_areas()
+		
+		if overlapping_area.size() > 0 and overlapping_area[ 0 ].has_method( "interact" ):
+			current_interactable = overlapping_area[ 0 ]
+			interact_labels.display( current_interactable )

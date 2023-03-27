@@ -1,0 +1,16 @@
+{
+	
+	"wood": {
+		"name": "Wood",
+		"stack_size": 99,
+		"level": 1
+	},
+	"berry": {
+		"name": "Berry",
+		"stack_size": 99,
+		"level": 1
+
+
+		}
+	
+}

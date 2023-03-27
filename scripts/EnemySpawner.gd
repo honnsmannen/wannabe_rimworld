@@ -49,5 +49,5 @@ func _on_Day_Night_night_tick(night) -> void:
 
 func _on_Day_Night_day_tick(day) -> void:
 	can_spawn_enemy = false
-	print("day")
+
 

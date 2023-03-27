@@ -22,7 +22,6 @@ onready var character = $KinematicBody2D
 onready var parent_level_scene = ("res://scener/värld_för_navigation.tscn")
 onready var filuren = $Filuren
 
-
 var characters = []
 
 onready var Bush = preload("res://scener/Bush.tscn")
@@ -42,7 +41,6 @@ func _ready() -> void:
 	noise.period = 15
 	
 	noise.octaves = 1
-
 	
 func _process(delta: float) -> void:
 	update()
@@ -81,7 +79,6 @@ func world_gen(width: int, height: int) -> void:
 				"""
 				if noise_value < 0:
 					compenserat_value = int(round(noise_value)) * -1
-
 				else:
 					compenserat_value = int(round(noise_value))
 					
@@ -104,9 +101,7 @@ func world_gen(width: int, height: int) -> void:
 				current_tiles.append(Vector2(x,y))
 				if current_tiles.size() > width * height:
 					current_tiles.remove(0)
-				print("generating")
 				#fixa så att den tar bort den tile som är längst bort från splearen
-					
 
 func _world_destruction(width , height) -> void:
 	var center = filuren.global_position
