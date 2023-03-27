@@ -27,7 +27,7 @@ func _on_Vapen_area_entered(area: Area2D) -> void:
 
 
 func _on_Vapen_body_entered(body: Node) -> void:
-	if body.is_in_group("enemy"):
+	if body.is_in_group("enemy") or body.is_in_group("tree"):
 		body.die()
 		queue_free()
 

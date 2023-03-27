@@ -14,6 +14,7 @@ var tree_list = []
 
 var generating = true
 var current_tiles = []
+var not_cleared = false
 
 var previous_left_mouse_click_global_position : Vector2
 var previous_right_mouse_click_global_position : Vector2
@@ -22,11 +23,14 @@ onready var character = $KinematicBody2D
 onready var parent_level_scene = ("res://scener/värld_för_navigation.tscn")
 onready var filuren = $Filuren
 
+onready var game_over = preload("res://scener/Game_Over.tscn")
+
 var characters = []
 
 onready var Bush = preload("res://scener/Bush.tscn")
 onready var tree = preload("res://scener/träd.tscn")
 onready var noise = OpenSimplexNoise.new()
+onready var tree_noise = OpenSimplexNoise.new()
 onready var tile = get_node("TileMap")
 func _ready() -> void:
 	level_navigation_map = get_world_2d().get_navigation_map()
@@ -42,10 +46,19 @@ func _ready() -> void:
 	
 	noise.octaves = 1
 	
+	tree_noise.seed = randi() * 2
+	
+	tree_noise.period = 1
+	
+	tree_noise.octaves = 100
+	
+	
+
+
 func _process(delta: float) -> void:
 	update()
-	world_gen(40, 40)
-	_world_destruction(60,60)
+	world_gen(40, 20)
+	_world_destruction(45,25)
 func init_pre_existing_level_characters() -> void:
 	# init all the character scenes in the scene tree when starting the level
 	# other characters created in create_character() will be initilized at that time
@@ -66,35 +79,31 @@ func world_gen(width: int, height: int) -> void:
 	for x in range(start_x, start_x + width):
 		for y in range(start_y, start_y + height):
 			if Vector2(x,y) in current_tiles:
-				pass	
+				generating = false
 			
 			# Generate world data at (x, y)
 			else:
 				var noise_x = x
 				var noise_y = y
 				var noise_value = noise.get_noise_2d(noise_x, noise_y)
-					
-				"""
-				den kommande biten skrev jag
-				"""
+				
+				var tree_noise_value = int(round(tree_noise.get_noise_2d(noise_x, noise_y)))
+				
 				if noise_value < 0:
 					compenserat_value = int(round(noise_value)) * -1
 				else:
 					compenserat_value = int(round(noise_value))
-					
-				if not randi() % 14 == 1 and compenserat_value != 1:
-					if not Vector2(x,y) in not_tree_list:
-						not_tree_list.append(Vector2(x,y))
-					
-				elif randi() % 14 == 1 and compenserat_value != 1:
-					if not Vector2(x,y) in tree_list and not Vector2(x,y) in not_tree_list:
-						tree_pos = Vector2(x * 32, y * 32)
-						tree_list.append(Vector2(x,y))
-						#print(tree_list)
-						var nytree = tree.instance()
-						nytree.global_position = tree_pos
-						add_child(nytree)
-					
+				
+				
+				if tree_noise_value == 1 and not Vector2(x,y) in tree_list:
+					tree_pos = Vector2(x * 32, y * 32)
+					tree_list.append(Vector2(x,y))
+					#print(tree_list)
+					var nytree = tree.instance()
+					nytree.global_position = tree_pos
+					add_child(nytree)
+				
+
 					
 				
 				$TileMap.set_cell(x, y, int(compenserat_value))
@@ -102,6 +111,13 @@ func world_gen(width: int, height: int) -> void:
 				if current_tiles.size() > width * height:
 					current_tiles.remove(0)
 				#fixa så att den tar bort den tile som är längst bort från splearen
+					
+					#_distance_from_2020(current_tiles, width, height)
+					
+				#print("generating")
+				generating = true
+				#fixa så att den tar bort den tile som är längst bort från splearen
+
 
 func _world_destruction(width , height) -> void:
 	var center = filuren.global_position
@@ -109,8 +125,25 @@ func _world_destruction(width , height) -> void:
 	var start_y = int(center.y / 32) - height/2
 	for x in range(start_x, start_x + width):
 		for y in range(start_y, start_y + height):
+			
+			
 			if Vector2(x,y) in current_tiles:
 				pass
-			else:	
+			else:
 				$TileMap.set_cell(x, y, -1)
-		
+				not_cleared = true
+"""
+func _distance_from_2020(input_array : Array,x : int, y : int) -> void:
+	var array_to_compare = input_array 
+	if !generating and not_cleared:
+		for i in range(x*y,0,-1):
+			
+			var compared_array = Vector2(x/2,y/2) - array_to_compare[i]
+			if compared_array.x > 15 or compared_array.x < -15 or compared_array.y > 15 or compared_array.y < -15:
+				current_tiles.erase(array_to_compare[i-1])
+		not_cleared = false
+"""
+
+
+func _on_Filuren_died() -> void:
+	add_child(game_over.instance())

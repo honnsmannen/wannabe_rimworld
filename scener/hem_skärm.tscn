@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://sprites/nyttspel.png" type="Texture" id=1]
 [ext_resource path="res://sprites/avsluta.png" type="Texture" id=2]
 [ext_resource path="res://scripts/hem_skärm.gd" type="Script" id=3]
+[ext_resource path="res://sprites/C3B527A4-F102-495A-BAE2-2A383AC8F47A.jpg" type="Texture" id=4]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 3 )
@@ -20,6 +21,14 @@ margin_top = 436.0
 margin_right = 608.0
 margin_bottom = 500.0
 texture_normal = ExtResource( 2 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Sprite" type="Sprite" parent="CanvasLayer"]
+position = Vector2( 518, 305 )
+scale = Vector2( 3.29747, 1.38117 )
+texture = ExtResource( 4 )
 
 [connection signal="button_up" from="nyttspel" to="." method="_on_nyttspel_button_up"]
 [connection signal="button_up" from="avsluta" to="." method="_on_avsluta_button_up"]

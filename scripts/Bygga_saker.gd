@@ -4,7 +4,7 @@ onready var healthbar = $CanvasLayer/HealthBar
 onready var hungerbar = $CanvasLayer/HungerBar
 onready var cell = null
 onready var new_abc = 0
-onready var tilemap = get_parent().get_node("TileMap")
+#onready var tilemap = get_parent().get_node("bygg_tilemap")
 var building = false
 
 
@@ -15,13 +15,13 @@ func _ready():
 
 
 func _process(delta):
-	var mouse :Vector2 = get_global_mouse_position()
-	var cell :Vector2 = tilemap.world_to_map(mouse)
-	var abc :int = tilemap.get_cellv(cell)
+#	var mouse :Vector2 = get_global_mouse_position()
+#	var cell :Vector2 = tilemap.world_to_map(mouse)
+#	var abc :int = tilemap.get_cellv(cell)
 	
-	if Input.is_action_just_pressed("click") and building == true:
-		tilemap.set_cellv(cell, new_abc)
-
+#	if Input.is_action_just_pressed("click") and building == true:
+#		tilemap.set_cellv(cell, new_abc)
+	pass
 
 func _on_Button_pressed() -> void:
 	if building == false:
@@ -32,13 +32,13 @@ func _on_Button_pressed() -> void:
 
 func _on_avp_vatten_pressed():
 	if building == true:
-		new_abc = 1
+		new_abc = 0
 		print("vatten")
 
 
 func _on_avp_golv_pressed():
 	if building == true:
-		new_abc = 0
+		new_abc = 1
 		print("golv")
 
 

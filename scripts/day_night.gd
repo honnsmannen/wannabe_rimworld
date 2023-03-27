@@ -9,6 +9,8 @@ const DAY_COLOR = Color("#ffffff")
 const EVENING_COLOR = Color("#ff3300")
 const TIME_SCALE = 0.05
 
+
+
 var night := false
 var day := true
 var time = 0

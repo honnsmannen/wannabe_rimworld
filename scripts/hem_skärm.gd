@@ -15,7 +15,7 @@ onready var spel = "res://scener/värld_för_navigation.tscn"
 
 
 func _on_avsluta_button_up():
-	breakpoint
+	get_tree().quit()
 
 
 func _on_nyttspel_button_up():
