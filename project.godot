@@ -29,7 +29,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://ui/hotbar_slot.gd"
 }, {
-"base": "NinePatchRect",
+"base": "Reference",
 "class": "Inventory",
 "language": "GDScript",
 "path": "res://Inventory/Inventory.gd"

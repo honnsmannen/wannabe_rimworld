@@ -5,6 +5,7 @@ class_name Resource_Manager extends Node
 var sprites = {
 	"wood": preload( "res://items/sprites/wood.png" ),
 	"berry": preload( "res://items/sprites/berries.png" ),
+	#"berry_empty": preload("res://items/sprites/berries_no_more.png")
 }
 
 var fonts = {
@@ -12,7 +13,7 @@ var fonts = {
 }
 
 var colors = {
-	"normal": Color( "905c32" )
+	"normal": Color("905c32")
 }
 
 var tscn = {

@@ -3,12 +3,13 @@ extends Area2D
 export( String ) var item_id
 
 var item : Item
-
+onready var berry = preload("res://items/sprites/berries.png")
 var object_name = ""
 
 func _ready():
 	if not item:
 		item = ItemManager.get_item(item_id)
+
 	
 	object_name = item.item_name
 

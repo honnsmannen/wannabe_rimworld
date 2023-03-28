@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/berries.png-ebad4d63bd689906e3289b8f888760d1.stex"
+path="res://.import/berries_no_more.png-823b6e323814b19884c57697e0ae7dfd.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://items/sprites/berries.png"
-dest_files=[ "res://.import/berries.png-ebad4d63bd689906e3289b8f888760d1.stex" ]
+source_file="res://items/sprites/berries_no_more.png"
+dest_files=[ "res://.import/berries_no_more.png-823b6e323814b19884c57697e0ae7dfd.stex" ]
 
 [params]
 

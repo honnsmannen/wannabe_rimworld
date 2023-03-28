@@ -12,15 +12,16 @@ onready var vapen_scene = preload("res://scener/Vapen.tscn")
 onready var enemy = preload("res://scener/fiender.tscn")
 onready var light = get_node("NightLight")
 export (int) var speed = 200
-onready var hp = max_hp
+#onready var hp = max_hp
 
-var max_hp = 100
+
 var velocity = Vector2()
 var dmg_amount = 10
 var can_attack := true
 var direction := Vector2.RIGHT
-var hunger := 100
-
+#var hunger := 100
+export( int ) var hunger = 50
+export( int ) var hp = 50
 var temp_item = ""
 var active_item = "tom"
 var carrying_an_item = false
@@ -29,7 +30,8 @@ var carrying_item = "tom"
 var current_interactable
 
 func _ready():
-	SignalManager.connect( "item_dropped", self, "_on_item_dropped" )
+	SignalManager.connect("item_dropped", self, "_on_item_dropped")
+	SignalManager.connect("ate", self,  "_on_ate")
 
 
 func get_input():
@@ -51,16 +53,19 @@ func get_input():
 		_shoot()
 		#$AudioStreamPlayer.playing = true
 	if Input.is_action_pressed( "activate" ) and current_interactable:
+		print("activate!")
 		current_interactable.interact()
 		
 			
 	if Input.is_action_just_pressed("switch_active_item"):
 		active_item_switch()
-	if Input.is_action_pressed( "eat" ) and current_interactable:
-
 		print("active_item: ", active_item)
 		print("carrying_item: ", carrying_item)
 		print("temp_item: ", temp_item)
+	if Input.is_action_pressed( "eat" ) and current_interactable:
+		pass #finns i inventory_slot.gd
+
+
 	if Input.is_action_just_pressed("ui_down"):
 		$Camera2D.zoom = $Camera2D.zoom - Vector2(0.1,0.1)
 	if Input.is_action_just_pressed("ui_up"):
@@ -82,12 +87,9 @@ func died():
 	visible = false
 	emit_signal("died")
 	
-
 func _on_Zone_body_entered(body: Node) -> void:
 	if body.is_in_group("enemy"):
 		damage(dmg_amount)
-
-
 
 func _shoot() -> void:
 	can_attack = false
@@ -102,8 +104,7 @@ func _shoot() -> void:
 func _on_AttackTimer_timeout() -> void:
 	can_attack = true
 	$AttackTimer.stop()
-	
-	
+
 func item_picked_up(item_id : String, amount) -> void:
 	if !carrying_an_item or carrying_item == item_id:
 		carrying_item = item_id
@@ -169,3 +170,17 @@ func _on_Zone_area_entered(area: Area2D) -> void:
 		if overlapping_area.size() > 0 and overlapping_area[ 0 ].has_method( "interact" ):
 			current_interactable = overlapping_area[ 0 ]
 			interact_labels.display( current_interactable )
+func _on_ate():
+	print("ate")
+	hunger += 20
+	hp += 10
+	if hp > 100:
+		hp = 100
+	if hunger > 100:
+		hunger = 100
+	#emit_signal("eating", hunger, hp)
+	emit_signal("hunger", hunger)
+	emit_signal("damaged", hp)
+	#SignalManager.emit_signal("eating", hp, hunger)
+	print("Hunger: ", hunger)
+	print("Healt: ", hp)

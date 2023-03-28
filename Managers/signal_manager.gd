@@ -12,6 +12,9 @@ signal active_hotbar_key(key)
 
 signal bush_sprite_changed(state)
 
+signal ate()
+#signal eating(hp, hunger)
+
 
 
 

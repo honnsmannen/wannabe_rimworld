@@ -145,6 +145,12 @@ tint_progress = Color( 0.462745, 0.184314, 0.0196078, 1 )
 
 [node name="inventory_player" parent="HUD/CanvasLayer" instance=ExtResource( 15 )]
 
+[node name="ScoreText" type="Label" parent="HUD/CanvasLayer"]
+visible = false
+margin_right = 40.0
+margin_bottom = 14.0
+text = "Score: "
+
 [node name="Yxa" parent="." instance=ExtResource( 11 )]
 position = Vector2( 467, 117 )
 
