@@ -26,6 +26,7 @@ texture_normal = ExtResource( 2 )
 layer = -1
 
 [node name="Sprite" type="Sprite" parent="CanvasLayer"]
+visible = false
 position = Vector2( 518, 305 )
 scale = Vector2( 3.29747, 1.38117 )
 texture = ExtResource( 4 )

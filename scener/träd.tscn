@@ -27,14 +27,9 @@ position = Vector2( -1, -19 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2( 0.7, 0.7 )
 shape = SubResource( 1 )
-
-[node name="Button" type="Button" parent="."]
-visible = false
-margin_right = 12.0
-margin_bottom = 20.0
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="." groups=["tree"]]
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
-[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]

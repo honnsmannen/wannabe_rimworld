@@ -3,7 +3,6 @@
 [ext_resource path="res://items/Item.gd" type="Script" id=2]
 
 [sub_resource type="StreamTexture" id=1]
-load_path = "res://.import/tree_icon.png-cbd9692784fd7d58d048d4d616dddae4.stex"
 
 [node name="Item" type="TextureRect"]
 margin_left = 1.0

@@ -9,8 +9,13 @@ var level_navigation_map
 #var tree_offset = Vector2(32,32)
 var tree_pos := Vector2(0,0)
 var bush_pos := Vector2(0,0)
+var stone_pos := Vector2(0,0)
+
 var not_tree_list = []
+var not_bush_list = []
 var tree_list = []
+var bush_list = []
+var stone_list = []
 
 var generating = true
 var current_tiles = []
@@ -19,7 +24,7 @@ var not_cleared = false
 var previous_left_mouse_click_global_position : Vector2
 var previous_right_mouse_click_global_position : Vector2
 
-onready var character = $KinematicBody2D
+#onready var character = $KinematicBody2D
 onready var parent_level_scene = ("res://scener/värld_för_navigation.tscn")
 onready var filuren = $Filuren
 
@@ -27,10 +32,13 @@ onready var game_over = preload("res://scener/Game_Over.tscn")
 
 var characters = []
 
-onready var Bush = preload("res://scener/Bush.tscn")
+onready var bush = preload("res://scener/Bush.tscn")
 onready var tree = preload("res://scener/träd.tscn")
+onready var stone = preload("res://scener/Boulder.tscn")
 onready var noise = OpenSimplexNoise.new()
 onready var tree_noise = OpenSimplexNoise.new()
+onready var bush_noise = OpenSimplexNoise.new()
+onready var stone_noise = OpenSimplexNoise.new()
 onready var tile = get_node("TileMap")
 func _ready() -> void:
 	level_navigation_map = get_world_2d().get_navigation_map()
@@ -44,13 +52,19 @@ func _ready() -> void:
 	noise.seed = randi()
 	noise.period = 15
 	
-	noise.octaves = 1
+	noise.octaves = 2
 	
 	tree_noise.seed = randi() * 2
+	bush_noise.seed = randi() * 2
+	stone_noise.seed = randi() * 2
 	
 	tree_noise.period = 1
-	
-	tree_noise.octaves = 100
+	bush_noise.period = 1
+	stone_noise.period = 1
+
+	tree_noise.octaves = 1
+	bush_noise.octaves = 1
+	stone_noise.octaves = 1
 	
 	
 
@@ -87,21 +101,30 @@ func world_gen(width: int, height: int) -> void:
 				var noise_y = y
 				var noise_value = noise.get_noise_2d(noise_x, noise_y)
 				
-				var tree_noise_value = int(round(tree_noise.get_noise_2d(noise_x, noise_y)))
-				
-				if noise_value < 0:
-					compenserat_value = int(round(noise_value)) * -1
-				else:
-					compenserat_value = int(round(noise_value))
+				var tree_noise_value = abs(tree_noise.get_noise_2d(noise_x, noise_y))
+				var bush_noise_value = abs(bush_noise.get_noise_2d(noise_x, noise_y))
+				var stone_noise_value = abs(stone_noise.get_noise_2d(noise_x, noise_y))
+				compenserat_value = round(abs(noise_value))
 				
 				
-				if tree_noise_value == 1 and not Vector2(x,y) in tree_list:
+				if tree_noise_value > 0.75 and not Vector2(x,y) in tree_list:
 					tree_pos = Vector2(x * 32, y * 32)
 					tree_list.append(Vector2(x,y))
-					#print(tree_list)
 					var nytree = tree.instance()
 					nytree.global_position = tree_pos
 					add_child(nytree)
+				if bush_noise_value > 0.85 and not Vector2(x,y) in bush_list:
+					bush_pos = Vector2(x * 32, y * 32)
+					bush_list.append(Vector2(x,y))
+					var nybush = bush.instance()
+					nybush.global_position = bush_pos
+					add_child(nybush)
+				if stone_noise_value > 0.85 and not Vector2(x,y) in stone_list:
+					stone_pos = Vector2(x * 32, y * 32)
+					stone_list.append(Vector2(x,y))
+					var nystone = stone.instance()
+					nystone.global_position = stone_pos
+					add_child(nystone)
 				
 
 					

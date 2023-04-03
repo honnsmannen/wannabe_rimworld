@@ -2,7 +2,7 @@ extends Node2D
 
 onready var healthbar = $CanvasLayer/HealthBar
 onready var hungerbar = $CanvasLayer/HungerBar
-onready var scoretext = $ScoreText
+#onready var scoretext = $ScoreText
 onready var cell = null
 onready var new_abc = 0
 onready var tilemap = get_parent().get_node("TileMap")
@@ -75,6 +75,8 @@ func _on_Filuren_hunger(hunger) -> void:
 		hungerbar.value = hunger
 		
 		
+"""
 func _scoreUpdated(amount) -> void:
 	score += amount
 	scoretext.text = "Score: " + str(score)
+"""

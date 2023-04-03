@@ -5,7 +5,8 @@ class_name Resource_Manager extends Node
 var sprites = {
 	"wood": preload( "res://items/sprites/wood.png" ),
 	"berry": preload( "res://items/sprites/berries.png" ),
-	#"berry_empty": preload("res://items/sprites/berries_no_more.png")
+	"stone": preload( "res://items/sprites/stone.png" ),
+
 }
 
 var fonts = {

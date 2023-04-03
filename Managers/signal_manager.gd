@@ -2,9 +2,9 @@ extends Node
 #Mellanhand för signaler
 
 # Inventory
-signal inventory_ready( inventory )
-signal player_inventory_ready( inventories )
-signal item_dropped( item )
+signal inventory_ready(inventory)
+signal player_inventory_ready(inventories)
+signal item_dropped(item)
 
 
 signal item_picked(item, sender)

@@ -53,7 +53,7 @@ anchor_bottom = 1.0
 margin_top = 4.0
 custom_colors/font_color = Color( 0.301961, 0.34902, 0.4, 1 )
 custom_fonts/font = SubResource( 1 )
-text = "Player's Inventory"
+text = "Player's inventory"
 align = 1
 valign = 1
 
@@ -74,7 +74,7 @@ anchor_bottom = 1.0
 margin_left = 9.0
 margin_top = 10.0
 margin_right = -9.0
-margin_bottom = -5.0
+margin_bottom = -10.0
 custom_constants/separation = 2
 
 [node name="player_inventory" parent="inventory_container" instance=ExtResource( 13 )]

@@ -24,7 +24,7 @@ func _on_item_picked( item, sender ):
 	#print("item picked")
 	print(item)
 	for i in player_inventories:
-		item = i.add_item( item )
+		item = i.add_item(item)
 		if not item:
 			sender.item_picked()
 			return

@@ -18,6 +18,7 @@ func _ready():
 	
 	if item:
 		item_container.add_child(item)
+		
 func get_input():
 	if Input.is_action_just_released("eat"):
 		eat(item)

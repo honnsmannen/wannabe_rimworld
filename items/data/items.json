@@ -11,6 +11,11 @@
 		"level": 1
 
 
+		},
+	"stone": {
+		"name": "Stone",
+		"stack_size": 99,
+		"level": 1
 		}
 	
 }
