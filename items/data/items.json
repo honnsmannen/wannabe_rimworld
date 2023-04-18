@@ -1,21 +1,35 @@
 {
-	
+
 	"wood": {
 		"name": "Wood",
-		"stack_size": 99,
-		"level": 1
+		"stack_size": 999
 	},
-	"berry": {
-		"name": "Berry",
-		"stack_size": 99,
-		"level": 1
+	"arrow": {
+		"name": "arrow",
+		"stack_size": 999
+	},
+	"plank": {
+		"name": "Plank",
+		"stack_size": 999
+	},
 
-
-		},
 	"stone": {
 		"name": "Stone",
-		"stack_size": 99,
-		"level": 1
-		}
-	
+		"stack_size": 999
+
+	},
+
+	"berry": {
+		"name": "Berry",
+		"stack_size": 999
+
+	},
+	"bow": {
+		"name": "Bow",
+		"stack_size": 1
+		
+	},
+
+
+
 }

@@ -7,8 +7,7 @@ signal night_tick(night)
 const NIGHT_COLOR = Color("#091d3a")
 const DAY_COLOR = Color("#ffffff")
 const EVENING_COLOR = Color("#ff3300")
-const TIME_SCALE = 0.0
-
+const TIME_SCALE = 0.1
 
 
 var night := false
@@ -24,7 +23,6 @@ func _process(delta:float) -> void:
 	var new_night = _get_night()
 	if new_day != last_day:
 		last_day = new_day
-		time = 2
 		emit_signal("day_tick", new_day)
 	if time > 3:
 		night = true

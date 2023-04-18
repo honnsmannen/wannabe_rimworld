@@ -5,16 +5,21 @@ extends Node
 signal inventory_ready(inventory)
 signal player_inventory_ready(inventories)
 signal item_dropped(item)
+signal content_changed(groups)
+signal inventory_group_content_changed(groups)
 
+signal crafting_opened(crafting_list_id)
+signal crafting_closed()
 
 signal item_picked(item, sender)
-signal active_hotbar_key(key)
+#signal active_hotbar_key(key)
+
+signal crossbow_obtained()
+signal arrow_shot()
+signal out_of_arrows()
+signal arrow_obtained()
 
 signal bush_sprite_changed(state)
 
 signal ate()
-#signal eating(hp, hunger)
-
-
-
 

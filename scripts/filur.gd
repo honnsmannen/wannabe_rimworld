@@ -18,6 +18,9 @@ export (int) var speed = 200
 var velocity = Vector2()
 var dmg_amount = 10
 var can_attack := true
+var can_bow := false
+var can_move := true
+var arrow := true
 var direction := Vector2.RIGHT
 #var hunger := 100
 export( int ) var hunger = 50
@@ -32,6 +35,7 @@ var current_interactable
 func _ready():
 	SignalManager.connect("item_dropped", self, "_on_item_dropped")
 	SignalManager.connect("ate", self,  "_on_ate")
+
 
 
 func get_input():
@@ -74,8 +78,7 @@ func _physics_process(delta):
 	get_input()
 	velocity = move_and_slide(velocity)
 	
-func _process( _delta ):
-	pass
+
 
 func damage(dmg_amount):
 	hp -= dmg_amount

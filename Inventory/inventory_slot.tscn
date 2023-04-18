@@ -4,8 +4,10 @@
 [ext_resource path="res://Inventory/inventory_slot.gd" type="Script" id=2]
 
 [node name="inventory_slot" type="TextureRect"]
-margin_right = 20.0
-margin_bottom = 20.0
+anchor_right = 0.016
+anchor_bottom = 0.027
+margin_right = 3.616
+margin_bottom = 3.8
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
 item_container = NodePath("item_container")

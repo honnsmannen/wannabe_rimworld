@@ -1,7 +1,6 @@
 extends Node2D
 
 var stockpile = {"yxa": 0}
-#var value_of_item = 
 var stockpile_locations = []
 
 """

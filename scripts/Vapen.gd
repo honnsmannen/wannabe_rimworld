@@ -13,8 +13,7 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	else:
-		global_position += direction * VELOCITY * delta
-
+		global_position += direction * VELOCITY * delta 
 
 func set_direction(pos1: Vector2, pos2: Vector2) -> void:
 	direction = (pos2 - pos1).normalized()

@@ -1,11 +1,7 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://inventory/inventory_player.gd" type="Script" id=1]
-[ext_resource path="res://sprites/x_hover.png" type="Texture" id=4]
-[ext_resource path="res://sprites/main panel.png" type="Texture" id=6]
-[ext_resource path="res://sprites/x_pressed.png" type="Texture" id=7]
-[ext_resource path="res://sprites/x_disabled.png" type="Texture" id=8]
-[ext_resource path="res://sprites/x_normal.png" type="Texture" id=9]
+[ext_resource path="res://sprites/inventory_background.png" type="Texture" id=2]
 [ext_resource path="res://sprites/title.png" type="Texture" id=10]
 [ext_resource path="res://font/Arcadepix Plus.ttf" type="DynamicFontData" id=11]
 [ext_resource path="res://inventory/inventory.tscn" type="PackedScene" id=13]
@@ -23,7 +19,7 @@ margin_left = -72.0
 margin_top = -58.0
 margin_right = 72.0
 mouse_filter = 1
-texture = ExtResource( 6 )
+texture = ExtResource( 2 )
 patch_margin_left = 10
 patch_margin_top = 10
 patch_margin_right = 10
@@ -57,17 +53,6 @@ text = "Player's inventory"
 align = 1
 valign = 1
 
-[node name="close" type="TextureButton" parent="."]
-visible = false
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -9.0
-margin_bottom = 9.0
-texture_normal = ExtResource( 9 )
-texture_pressed = ExtResource( 7 )
-texture_hover = ExtResource( 4 )
-texture_disabled = ExtResource( 8 )
-
 [node name="inventory_container" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -83,5 +68,3 @@ anchor_bottom = 0.0
 margin_right = 126.0
 margin_bottom = 16.0
 inventory_name = "inventory"
-
-[connection signal="pressed" from="close" to="." method="_on_close_pressed"]

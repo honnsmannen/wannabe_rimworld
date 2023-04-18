@@ -14,22 +14,12 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/day_night.gd"
 }, {
-"base": "Inventory_Slot",
-"class": "Equipment_Slot",
+"base": "PanelContainer",
+"class": "InnerPanel",
 "language": "GDScript",
-"path": "res://ui/equipment_slot.gd"
+"path": "res://ui/inner_panel.gd"
 }, {
 "base": "NinePatchRect",
-"class": "Hotbar",
-"language": "GDScript",
-"path": "res://ui/hotbar.gd"
-}, {
-"base": "Inventory_Slot",
-"class": "Hotbar_Slot",
-"language": "GDScript",
-"path": "res://ui/hotbar_slot.gd"
-}, {
-"base": "Reference",
 "class": "Inventory",
 "language": "GDScript",
 "path": "res://Inventory/Inventory.gd"
@@ -48,16 +38,20 @@ _global_script_classes=[ {
 "class": "Resource_Manager",
 "language": "GDScript",
 "path": "res://Managers/resource_manager.gd"
+}, {
+"base": "Control",
+"class": "Window",
+"language": "GDScript",
+"path": "res://ui/window.gd"
 } ]
 _global_script_class_icons={
 "DayNightCycle": "",
-"Equipment_Slot": "",
-"Hotbar": "",
-"Hotbar_Slot": "",
+"InnerPanel": "",
 "Inventory": "",
 "Inventory_Slot": "",
 "Item": "",
-"Resource_Manager": ""
+"Resource_Manager": "",
+"Window": ""
 }
 
 [application]
@@ -149,6 +143,11 @@ hotbar_5={
 eat={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":0,"physical_scancode":69,"unicode":0,"echo":false,"script":null)
+ ]
+}
+R_click={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":2,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
 

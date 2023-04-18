@@ -1,43 +1,62 @@
 class_name Item extends TextureRect
 
-var id
-var item_name
+signal quantity_changed(quantity)
+
+var id : String
+var item_name : String
+
+
 var stack_size : int = 1
 var quantity : int = 1 setget set_quantity
-var level : int = 1
-var components = {}
+
+
 
 var lbl_quantity
+var item_slot setget set_slot
 
 func _init(item_id, data):
-	#Ger items deras namn och sådant
+	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	id = item_id
 	item_name = data.name
-	level = data.level
 	texture = ResourceManager.sprites[id]
 	
-	if data.has("stack_size"):
-		stack_size = data.stack_size
+	stack_size = data.stack_size
 
-
+#Tar label från resourcemanager för att visa kvantitet
 func _ready():
-	#skriver ut mängden av item
-	lbl_quantity = Label.new()
-	lbl_quantity.set("custom_fonts/font", ResourceManager.fonts[ 8 ])
-	lbl_quantity.set("custom_colors/font_color", Color.black)
+	lbl_quantity = ResourceManager.get_instance("quantity")
 	add_child(lbl_quantity)
-	set_quantity(quantity)
+	lbl_quantity.quantity = quantity
 
-func set_quantity(value):#bestämmer mängden av item
+#bestämmer kvantitet 
+func set_quantity(value):
 	quantity = value
+	emit_signal("quantity_changed", quantity)
 	
 	if lbl_quantity:
-		lbl_quantity.text = str(quantity)
-		lbl_quantity.visible = quantity > 1
+		lbl_quantity.quantity = quantity
+	
+	if quantity <= 0:
+		destroy()
 
-func add_item_quantity(value): #Lägger till till mängden av item
+#lägger till värdet av set_quantity
+func add_item_quantity(value):
 	var remainder = quantity + value - stack_size
-	quantity = min(quantity + value, stack_size)
+	quantity = int(min(quantity + value, stack_size))
 	set_quantity(quantity)
 	return remainder
+
+
+func set_slot(value):
+	item_slot = value
+
+
+func destroy():
+	if item_slot:
+		item_slot.remove_item()
+
+
+func get_data():
+	return {"id": id, "quantity": quantity}
+
 

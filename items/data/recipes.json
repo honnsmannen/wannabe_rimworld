@@ -1,0 +1,51 @@
+{
+  "tier1": {
+    "Plank": {
+      "price": [
+        {
+          "id": "wood",
+          "quantity": 1
+        }
+      ],
+      "produce": [
+        {
+          "id": "plank",
+          "quantity": 4
+        }
+      ]
+    },
+    "Bow": {
+      "price": [
+        {
+          "id": "wood",
+          "quantity": 30
+        }
+      ],
+      "produce": [
+        {
+          "id": "bow",
+          "quantity": 1
+        }
+      ]
+   
+    },
+    "Arrow": {
+      "price": [
+        {
+          "id": "wood",
+          "quantity": 1
+        },
+	{
+          "id": "stone",
+          "quantity": 1
+        }
+      ],
+      "produce": [
+        {
+          "id": "arrow",
+          "quantity": 1
+        }
+      ]
+    }
+  }
+}

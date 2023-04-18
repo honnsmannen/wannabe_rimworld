@@ -1,9 +1,8 @@
 extends Area2D
 
-export( String ) var item_id
+export(String) var item_id
 
 var item : Item
-onready var berry = preload("res://items/sprites/berries.png")
 var object_name = ""
 
 func _ready():
@@ -18,7 +17,9 @@ func interact():
 	SignalManager.emit_signal("item_picked", item, self)
 
 
+
 func item_picked():
 	queue_free()
+
 
 var action = "pickup"
