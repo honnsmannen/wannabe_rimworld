@@ -28,6 +28,7 @@ func create_wood_item(pos):
 	var wood_item = floor_item_scene.instance()
 	
 	wood_item.item_id = "wood"
-	get_parent().add_child(wood_item)
+	get_parent().call_deferred("add_child", wood_item)
+	#get_parent().add_child(wood_item)
 	wood_item.position = pos
 

@@ -6,14 +6,16 @@ signal damaged(hp)
 signal hunger(hunger)
 
 export( NodePath ) onready var zone = get_node(zone) as Area2D
-export( NodePath ) onready var interact_labels = get_node( interact_labels ) as Control
+export( NodePath ) onready var interact_labels = get_node(interact_labels) as Control
 
 onready var vapen_scene = preload("res://scener/Vapen.tscn")
 onready var enemy = preload("res://scener/fiender.tscn")
+onready var bow_scene = preload("res://scener/Bow.tscn")
+onready var arrow_scene = preload("res://scener/Arrow.tscn")
 onready var light = get_node("NightLight")
 export (int) var speed = 200
 #onready var hp = max_hp
-
+export(String) var crafting_list
 
 var velocity = Vector2()
 var dmg_amount = 10
@@ -35,32 +37,51 @@ var current_interactable
 func _ready():
 	SignalManager.connect("item_dropped", self, "_on_item_dropped")
 	SignalManager.connect("ate", self,  "_on_ate")
+	SignalManager.connect("crossbow_obtained", self, "_on_crossbow_obtained")
+	SignalManager.connect("out_of_arrows", self, "_on_out_of_arrows")
+	SignalManager.connect("arrow_obtained", self, "_on_arrow_obtained")
 
 
+
+signal crossbow_obtained()
+signal arrow_shot()
+signal out_of_arrows()
+signal arrow_obtained()
 
 func get_input():
 	velocity = Vector2()
-	if Input.is_action_pressed("right"):
+	if Input.is_action_pressed("right") and can_move:
 		velocity.x += 1
 		direction = Vector2.RIGHT
-	if Input.is_action_pressed("left"):
+	if Input.is_action_pressed("left") and can_move:
 		velocity.x -= 1
 		direction = Vector2.LEFT
-	if Input.is_action_pressed("down"):
+	if Input.is_action_pressed("down") and can_move:
 		velocity.y += 1
 		direction = Vector2.DOWN
-	if Input.is_action_pressed("up"):
+	if Input.is_action_pressed("up") and can_move:
 		velocity.y -= 1
 		direction = Vector2.UP
 	velocity = velocity.normalized() * speed
 	if Input.is_action_pressed("Attack") and can_attack:
 		_shoot()
-		#$AudioStreamPlayer.playing = true
+	if Input.is_action_pressed("R_click") and can_bow and arrow:
+		bow_shoot()
+
+	if Input.is_action_just_pressed("craft"):
+		can_move = false
+		SignalManager.emit_signal("crafting_opened", crafting_list)
+
+	if Input.is_action_just_pressed("close_crafting"):
+		can_move = true
+		print("yup")
+		SignalManager.emit_signal("crafting_closed")
+
 	if Input.is_action_pressed( "activate" ) and current_interactable:
 		print("activate!")
 		current_interactable.interact()
 		
-			
+		
 	if Input.is_action_just_pressed("switch_active_item"):
 		active_item_switch()
 		print("active_item: ", active_item)
@@ -103,9 +124,26 @@ func _shoot() -> void:
 	vapen_instance.set_direction($Vapenspawn.global_position, get_global_mouse_position())
 	
 	get_tree().get_root().add_child(vapen_instance)
+func bow_shoot() -> void:
+	can_bow = false
+	SignalManager.emit_signal("arrow_shot")
+	$AttackTimer.start()
+
+	var bow_instance = bow_scene.instance()
+	var arrow_instance = arrow_scene.instance()
+	bow_instance.global_position = $Vapenspawn.global_position
+	bow_instance.set_direction($Vapenspawn.global_position, get_global_mouse_position())
+	
+	arrow_instance.global_position = $Vapenspawn.global_position
+	arrow_instance.set_direction($Vapenspawn.global_position, get_global_mouse_position())
+	
+	
+	get_tree().get_root().add_child(bow_instance)
+	get_tree().get_root().add_child(arrow_instance)
 
 func _on_AttackTimer_timeout() -> void:
 	can_attack = true
+	can_bow = true
 	$AttackTimer.stop()
 
 func item_picked_up(item_id : String, amount) -> void:
@@ -149,17 +187,17 @@ func _on_HungerTimer_timeout() -> void:
 func _on_DamageTimer_timeout() -> void:
 	damage(dmg_amount)
 
-
-func _on_item_dropped( item ):
+"""
+func _on_item_dropped(item):
 	var floor_item = ResourceManager.tscn.floor_item.instance()
 	floor_item.item = item
-	get_parent().add_child( floor_item )
+	get_parent().add_child(floor_item)
 	floor_item.position = position
-
+"""
 
 func _on_Zone_area_exited(area: Area2D) -> void:
 	if current_interactable == area:
-		if current_interactable.has_method( "out_of_range" ):
+		if current_interactable.has_method("out_of_range"):
 			current_interactable.out_of_range()
 		
 		interact_labels.hide()
@@ -173,17 +211,30 @@ func _on_Zone_area_entered(area: Area2D) -> void:
 		if overlapping_area.size() > 0 and overlapping_area[ 0 ].has_method( "interact" ):
 			current_interactable = overlapping_area[ 0 ]
 			interact_labels.display( current_interactable )
+
+
 func _on_ate():
-	print("ate")
 	hunger += 20
 	hp += 10
 	if hp > 100:
 		hp = 100
 	if hunger > 100:
 		hunger = 100
-	#emit_signal("eating", hunger, hp)
+
 	emit_signal("hunger", hunger)
 	emit_signal("damaged", hp)
-	#SignalManager.emit_signal("eating", hp, hunger)
+
 	print("Hunger: ", hunger)
 	print("Healt: ", hp)
+
+func _on_crossbow_obtained():
+	print("we obtainin fo tonight")
+	can_bow = true
+	
+func _on_arrow_obtained():
+	print("we shooting arrows fo tonight")
+	arrow = true
+func _on_out_of_arrows():
+	arrow = false
+#func _on_arrow_shot():
+

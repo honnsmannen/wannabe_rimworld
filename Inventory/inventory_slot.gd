@@ -43,6 +43,7 @@ func eat(item): #funktion för att käka
 				SignalManager.emit_signal("ate")
 			elif item.quantity == 1:
 				item.quantity -= 1
+				SignalManager.emit_signal("ate")
 				remove_item()
 
 

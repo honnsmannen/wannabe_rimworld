@@ -161,7 +161,8 @@ func world_gen(width: int, height: int, start_xy :Vector2) -> void:
 					nystone.global_position = stone_pos
 					add_child(nystone)
 				
-				
+
+					
 				
 				$TileMap.set_cell(x, y, int(compenserat_value))
 				current_tiles.append(Vector2(x,y))

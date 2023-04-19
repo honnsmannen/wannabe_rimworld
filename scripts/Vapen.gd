@@ -1,19 +1,21 @@
 extends Area2D
 
-const VELOCITY = 600
+const VELOCITY = 0
 
 
 var direction := Vector2.ZERO
 
 func _ready() -> void:
 	$Timer.start()
+	$AnimationPlayer.play("yxa_hugg")
 
 func _physics_process(delta: float) -> void:
 	if direction == Vector2.ZERO:
 		return
 	
 	else:
-		global_position += direction * VELOCITY * delta 
+		global_position += direction * VELOCITY * delta
+
 
 func set_direction(pos1: Vector2, pos2: Vector2) -> void:
 	direction = (pos2 - pos1).normalized()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://scener/Filuren.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/day_night.gd" type="Script" id=2]
@@ -15,20 +15,8 @@
 [ext_resource path="res://scener/Boulder.tscn" type="PackedScene" id=13]
 [ext_resource path="res://sprites/progress_bar.png" type="Texture" id=14]
 [ext_resource path="res://Inventory/inventory_player.tscn" type="PackedScene" id=15]
-[ext_resource path="res://font/Arcadepix Plus.ttf" type="DynamicFontData" id=16]
+[ext_resource path="res://ui/crafting_list.tscn" type="PackedScene" id=16]
 [ext_resource path="res://items/floor_item.tscn" type="PackedScene" id=17]
-[ext_resource path="res://sprites/main panel.png" type="Texture" id=19]
-[ext_resource path="res://sprites/x_disabled.png" type="Texture" id=20]
-[ext_resource path="res://sprites/title.png" type="Texture" id=21]
-[ext_resource path="res://sprites/x_hover.png" type="Texture" id=22]
-[ext_resource path="res://sprites/x_pressed.png" type="Texture" id=23]
-[ext_resource path="res://sprites/x_normal.png" type="Texture" id=24]
-[ext_resource path="res://sprites/inner_panel.png" type="Texture" id=25]
-[ext_resource path="res://ui/crafting_list.tscn" type="PackedScene" id=26]
-
-[sub_resource type="DynamicFont" id=1]
-size = 14
-font_data = ExtResource( 16 )
 
 [sub_resource type="NavigationPolygon" id=5]
 vertices = PoolVector2Array( 32, 32, 0, 32, 0, 0, 32, 0 )
@@ -158,13 +146,6 @@ tint_under = Color( 0, 0, 0, 1 )
 tint_progress = Color( 0.462745, 0.184314, 0.0196078, 1 )
 
 [node name="inventory_player" parent="HUD/CanvasLayer" instance=ExtResource( 15 )]
-anchor_left = 0.535
-anchor_right = 0.535
-margin_left = -107.84
-margin_top = -97.0
-margin_right = 36.16
-margin_bottom = -39.0
-rect_scale = Vector2( 1.5, 1.5 )
 
 [node name="ScoreText" type="Label" parent="HUD/CanvasLayer"]
 visible = false
@@ -172,97 +153,7 @@ margin_right = 40.0
 margin_bottom = 14.0
 text = "Score: "
 
-[node name="ActiveItem" type="NinePatchRect" parent="HUD/CanvasLayer"]
-visible = false
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-margin_left = -153.0
-margin_top = -58.0
-margin_right = -95.0
-texture = ExtResource( 19 )
-patch_margin_left = 9
-patch_margin_top = 9
-patch_margin_right = 9
-patch_margin_bottom = 9
-
-[node name="title" type="NinePatchRect" parent="HUD/CanvasLayer/ActiveItem"]
-visible = false
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -61.0
-margin_top = -11.0
-margin_right = 61.0
-margin_bottom = 7.0
-mouse_filter = 1
-texture = ExtResource( 21 )
-patch_margin_left = 8
-patch_margin_top = 6
-patch_margin_right = 8
-patch_margin_bottom = 2
-
-[node name="Label" type="Label" parent="HUD/CanvasLayer/ActiveItem/title"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 4.0
-custom_colors/font_color = Color( 0.301961, 0.34902, 0.4, 1 )
-custom_fonts/font = SubResource( 1 )
-text = "Player's inventory"
-align = 1
-valign = 1
-
-[node name="close" type="TextureButton" parent="HUD/CanvasLayer/ActiveItem"]
-visible = false
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -9.0
-margin_bottom = 9.0
-texture_normal = ExtResource( 24 )
-texture_pressed = ExtResource( 23 )
-texture_hover = ExtResource( 22 )
-texture_disabled = ExtResource( 20 )
-
-[node name="inventory_container" type="VBoxContainer" parent="HUD/CanvasLayer/ActiveItem"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 9.0
-margin_top = 10.0
-margin_right = -9.0
-margin_bottom = -10.0
-custom_constants/separation = 2
-
-[node name="player_inventory" type="NinePatchRect" parent="HUD/CanvasLayer/ActiveItem/inventory_container"]
-margin_right = 40.0
-margin_bottom = 16.0
-texture = ExtResource( 25 )
-patch_margin_left = 8
-patch_margin_top = 8
-patch_margin_right = 8
-patch_margin_bottom = 8
-
-[node name="slot_container" type="GridContainer" parent="HUD/CanvasLayer/ActiveItem/inventory_container/player_inventory"]
-anchor_left = 0.028
-anchor_top = 0.13
-anchor_right = 0.958
-anchor_bottom = 0.879
-margin_left = -0.12
-margin_top = -0.0799999
-margin_right = -37.32
-margin_bottom = -12.064
-custom_constants/vseparation = 4
-custom_constants/hseparation = 4
-
-[node name="crafting_list" parent="HUD/CanvasLayer" instance=ExtResource( 26 )]
-anchor_left = 0.535
-anchor_top = 0.525
-anchor_right = 0.535
-anchor_bottom = 0.525
-margin_left = -120.84
-margin_top = -181.0
-margin_right = 23.16
-margin_bottom = -121.0
-rect_scale = Vector2( 1.5, 1.5 )
+[node name="crafting_list" parent="HUD/CanvasLayer" instance=ExtResource( 16 )]
 
 [node name="Yxa" parent="." instance=ExtResource( 11 )]
 position = Vector2( -200, 117 )
@@ -278,7 +169,6 @@ tile_data = PoolIntArray( -65489, 2, 0, -65488, 2, 0, -65487, 2, 0, -65486, 2, 0
 
 [node name="Filuren" parent="." instance=ExtResource( 1 )]
 position = Vector2( 30, 30 )
-crafting_list = "tier1"
 
 [node name="Day_Night" type="CanvasModulate" parent="."]
 script = ExtResource( 2 )
@@ -306,6 +196,15 @@ position = Vector2( 0, 250 )
 
 [node name="Boulder" parent="." instance=ExtResource( 13 )]
 position = Vector2( 0, -91 )
+
+[node name="negspann" type="Polygon2D" parent="."]
+visible = false
+polygon = PoolVector2Array( -3, -7, 5, -7, 8, 0, 4, 6, -4, 6, -9, 0 )
+
+[node name="posspann" type="Polygon2D" parent="."]
+visible = false
+position = Vector2( -1, -18 )
+polygon = PoolVector2Array( -3, -6, 5, -6, 8, 0, 4, 5, -3, 6, -6, 0 )
 
 [connection signal="pressed" from="HUD/CanvasLayer/avpå vatten" to="HUD" method="_on_avp_vatten_pressed"]
 [connection signal="pressed" from="HUD/CanvasLayer/avpå golv" to="HUD" method="_on_avp_golv_pressed"]

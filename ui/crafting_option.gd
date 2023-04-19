@@ -38,7 +38,6 @@ func _on_craft_pressed():
 	InventoryManager.add_items(ItemManager.get_items(produce))
 
 func _on_inventory_group_changed(groups):
-	print("this aint even changin at all!")
 	set_craft_button()
 
 

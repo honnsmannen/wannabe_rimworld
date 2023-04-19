@@ -74,7 +74,6 @@ func remove_items(items) -> void:
 
 
 func _on_inventory_content_changed(groups):
-	print("im am going to assasinate the president")
 	SignalManager.emit_signal("inventory_group_content_changed", groups)
 	
 
