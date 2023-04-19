@@ -6,11 +6,14 @@ var item : Item = null
 
 
 
+
 func _ready():
+	#SignalManager.connect( "item_dropped", self, "_on_item_dropped" )
 	nav_obstacle = $Area2D/NavigationObstacle2D
 	Navigation2DServer.agent_set_map(nav_obstacle.get_rid(), get_world_2d().get_navigation_map())
 	Navigation2DServer.agent_set_radius(nav_obstacle.get_rid(), 10)
-
+	#$VisibilityNotifier2D.connect("screen_entered", self, "show")
+	#$VisibilityNotifier2D.connect("screen_exited", self, "hide")
 
 func _on_Area2D_body_entered(body: Node) -> void:
 	if body.is_in_group("player"):

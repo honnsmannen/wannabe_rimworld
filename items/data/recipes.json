@@ -18,7 +18,7 @@
       "price": [
         {
           "id": "wood",
-          "quantity": 3
+          "quantity": 30
         }
       ],
       "produce": [
@@ -37,7 +37,7 @@
         },
 	{
           "id": "stone",
-          "quantity": 0
+          "quantity": 1
         }
       ],
       "produce": [

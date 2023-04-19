@@ -11,7 +11,7 @@ signal inventory_group_content_changed(groups)
 signal crafting_opened(crafting_list_id)
 signal crafting_closed()
 
-signal item_picked(item, sender)
+signal item_picked(item)
 #signal active_hotbar_key(key)
 
 signal crossbow_obtained()

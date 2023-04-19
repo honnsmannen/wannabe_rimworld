@@ -43,7 +43,7 @@ func create_berry_item(pos):
 	var floor_item_scene = load("res://items/floor_item.tscn")
 	var berry_item = floor_item_scene.instance()
 	berry_item.item_id = "berry"
-	get_parent().add_child(berry_item)
+	get_parent().call_deferred("add_child", berry_item)
 	berry_item.position = pos
 
 func _berry_full_state():

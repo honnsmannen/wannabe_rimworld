@@ -28,7 +28,7 @@ var direction := Vector2.RIGHT
 export( int ) var hunger = 50
 export( int ) var hp = 50
 var temp_item = ""
-var active_item = "tom"
+var active_item = "yxa"
 var carrying_an_item = false
 var item_amount = 0
 var carrying_item = "tom"
@@ -152,8 +152,8 @@ func item_picked_up(item_id : String, amount) -> void:
 		item_amount += amount
 		carrying_an_item = true
 		print(item_id)
-		SignalManager.emit_signal("item_picked", item_id)
-		
+
+
 #kod för att lämna items
 func item_dropped_off() -> void:
 	if carrying_an_item:
@@ -187,13 +187,6 @@ func _on_HungerTimer_timeout() -> void:
 func _on_DamageTimer_timeout() -> void:
 	damage(dmg_amount)
 
-"""
-func _on_item_dropped(item):
-	var floor_item = ResourceManager.tscn.floor_item.instance()
-	floor_item.item = item
-	get_parent().add_child(floor_item)
-	floor_item.position = position
-"""
 
 func _on_Zone_area_exited(area: Area2D) -> void:
 	if current_interactable == area:
@@ -224,15 +217,10 @@ func _on_ate():
 	emit_signal("hunger", hunger)
 	emit_signal("damaged", hp)
 
-	print("Hunger: ", hunger)
-	print("Healt: ", hp)
-
 func _on_crossbow_obtained():
-	print("we obtainin fo tonight")
 	can_bow = true
 	
 func _on_arrow_obtained():
-	print("we shooting arrows fo tonight")
 	arrow = true
 func _on_out_of_arrows():
 	arrow = false
