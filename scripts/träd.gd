@@ -17,7 +17,7 @@ func _ready():
 
 
 func _on_Area2D_body_entered(body: Node) -> void:
-	if body.is_in_group("player") and body.active_item == "yxa":
+	if body.is_in_group("yxa"):
 		var tree_pos = position
 		print(tree_pos)
 		create_wood_item(tree_pos)
@@ -32,3 +32,11 @@ func create_wood_item(pos):
 	#get_parent().add_child(wood_item)
 	wood_item.position = pos
 
+
+
+func _on_Area2D_area_entered(area: Area2D) -> void:
+		if area.is_in_group("yxa"):
+			var tree_pos = position
+			print(tree_pos)
+			create_wood_item(tree_pos)
+			queue_free()
