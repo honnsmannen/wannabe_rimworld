@@ -1,6 +1,5 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Inventory/InventoryContainer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sprites/progress_bar.png" type="Texture" id=2]
 [ext_resource path="res://sprites/mark.png" type="Texture" id=3]
 [ext_resource path="res://scripts/Bygga_saker.gd" type="Script" id=4]
@@ -33,7 +32,7 @@ margin_top = 124.0
 margin_right = 305.0
 margin_bottom = 159.0
 
-[node name="avpå vägg" type="TextureButton" parent="CanvasLayer"]
+[node name="plank" type="TextureButton" parent="CanvasLayer"]
 margin_left = 250.0
 margin_top = 64.0
 margin_right = 290.0
@@ -66,9 +65,7 @@ fill_mode = 1
 tint_under = Color( 0, 0, 0, 1 )
 tint_progress = Color( 0.462745, 0.184314, 0.0196078, 1 )
 
-[node name="InventoryContainer" parent="CanvasLayer" instance=ExtResource( 1 )]
-
 [connection signal="pressed" from="CanvasLayer/avpå vatten" to="." method="_on_avp_vatten_pressed"]
 [connection signal="pressed" from="CanvasLayer/avpå golv" to="." method="_on_avp_golv_pressed"]
 [connection signal="pressed" from="CanvasLayer/avpå building" to="." method="_on_avp_building_pressed"]
-[connection signal="pressed" from="CanvasLayer/avpå vägg" to="." method="_on_avp_vgg_pressed"]
+[connection signal="pressed" from="CanvasLayer/plank" to="." method="_on_plank_pressed"]

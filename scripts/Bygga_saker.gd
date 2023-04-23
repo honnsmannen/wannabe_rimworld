@@ -8,26 +8,30 @@ onready var new_abc = 0
 onready var tilemap = get_parent().get_node("TileMap")
 onready var player = get_parent().get_node("Filuren")
 var building = false
-
+var has_planks = false
 var score: int = 0
 
 
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
 	healthbar.value = player.hp
 	hungerbar.value = player.hunger
+	SignalManager.connect("building", self, "_on_building")
+	SignalManager.connect("out_of_plank", self, "_on_out_of_plank")
 
 
 func _process(delta):
-	#SignalManager.connect("eating", hp, hunger, "_on_eating")
 	var mouse :Vector2 = get_global_mouse_position()
 	var cell :Vector2 = tilemap.world_to_map(mouse)
 	var abc :int = tilemap.get_cellv(cell)
 	
-	if Input.is_action_just_pressed("click") and building == true:
-		tilemap.set_cellv(cell, new_abc)
-	#pass
+
+	
+	if Input.is_action_just_pressed("click") and building and has_planks:
+		tilemap.set_cellv(cell, 2)
+		SignalManager.emit_signal("plank_placed")
+	
 
 func _on_Button_pressed() -> void:
 	if building == false:
@@ -43,9 +47,10 @@ func _on_avp_vatten_pressed():
 
 
 func _on_avp_golv_pressed():
-	if building == true:
-		new_abc = 1
-		print("golv")
+	if has_planks:
+		building = true
+	else:
+		building = false
 
 
 func _on_avp_building_pressed():
@@ -55,10 +60,11 @@ func _on_avp_building_pressed():
 		building = false
 
 
-func _on_avp_vgg_pressed():
-	if building == true:
-		new_abc = 2
-		print("vägg")
+func _on_plank_pressed():
+	if building == false:
+		building = true
+	else:
+		building = false
 
 
 func _on_Filuren_damaged(hp) -> void:
@@ -74,7 +80,16 @@ func _on_Filuren_hunger(hunger) -> void:
 	elif hungerbar.value < hunger:
 		hungerbar.value = hunger
 		
-		
+
+func _on_building():
+	print("we buildnig")
+	has_planks = true
+
+func _on_out_of_plank():
+	print("no building")
+	has_planks = false
+	building = false
+
 """
 func _scoreUpdated(amount) -> void:
 	score += amount

@@ -29,7 +29,7 @@ func set_info(recipe_id, price_items, produce_items):
 		produce_node.set_info(item, item_data.quantity)
 
 func set_craft_button():
-	var can_craft = InventoryManager.has_items(price, "crafting") and InventoryManager.has_space_for_items(produce)
+	var can_craft = InventoryManager.has_items(price, "crafting") and InventoryManager.has_space(produce)
 	craft_btn.disabled = not can_craft
 
 #Tar bort price items från inventory och lägger till produce items

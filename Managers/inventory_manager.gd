@@ -17,13 +17,13 @@ func _ready():
 
 func has_items(items_data, group_id) -> bool:
 	for item_data in items_data:
-		if get_item_count(item_data.id) < item_data.quantity:
+		if get_count(item_data.id) < item_data.quantity:
 			return false
 
 	return true
 
 #Antal items i stack
-func get_item_count(id) -> int:
+func get_count(id) -> int:
 	var count = 0
 	for inv in player_inventories:
 		count += inv.get_item_count(id)
@@ -31,7 +31,7 @@ func get_item_count(id) -> int:
 	return count
 
 #kollar om det finns plats att lägga till item vid crafting
-func has_space_for_items(items_data):
+func has_space(items_data):
 	var items = ItemManager.get_items(items_data)
 	
 	for inv in player_inventories:
@@ -58,7 +58,7 @@ func add_items(items):
 	for item in items:
 		if item.stack_size > 1:
 			for inv in player_inventories:
-				item = inv.add_stack_item(item)
+				item = inv.add_item_stack(item)
 				if item == null: break
 		if item:
 			for inv in player_inventories:

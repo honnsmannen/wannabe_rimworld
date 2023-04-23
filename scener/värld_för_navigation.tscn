@@ -111,8 +111,7 @@ margin_top = 124.0
 margin_right = 305.0
 margin_bottom = 159.0
 
-[node name="avpå vägg" type="TextureButton" parent="HUD/CanvasLayer"]
-visible = false
+[node name="plank" type="TextureButton" parent="HUD/CanvasLayer"]
 margin_left = 250.0
 margin_top = 64.0
 margin_right = 290.0
@@ -210,7 +209,7 @@ polygon = PoolVector2Array( -3, -6, 5, -6, 8, 0, 4, 5, -3, 6, -6, 0 )
 [connection signal="pressed" from="HUD/CanvasLayer/avpå vatten" to="HUD" method="_on_avp_vatten_pressed"]
 [connection signal="pressed" from="HUD/CanvasLayer/avpå golv" to="HUD" method="_on_avp_golv_pressed"]
 [connection signal="pressed" from="HUD/CanvasLayer/avpå building" to="HUD" method="_on_avp_building_pressed"]
-[connection signal="pressed" from="HUD/CanvasLayer/avpå vägg" to="HUD" method="_on_avp_vgg_pressed"]
+[connection signal="pressed" from="HUD/CanvasLayer/plank" to="HUD" method="_on_plank_pressed"]
 [connection signal="damaged" from="Filuren" to="HUD" method="_on_Filuren_damaged"]
 [connection signal="hunger" from="Filuren" to="HUD" method="_on_Filuren_hunger"]
 [connection signal="day_tick" from="Day_Night" to="Filuren" method="_on_Day_Night_day_tick"]

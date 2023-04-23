@@ -20,6 +20,8 @@ signal out_of_arrows()
 signal arrow_obtained()
 
 signal bush_sprite_changed(state)
-
+signal building()
+signal out_of_plank()
+signal plank_placed()
 signal ate()
 

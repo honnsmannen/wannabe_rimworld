@@ -3,7 +3,7 @@ class_name Inventory extends NinePatchRect
 var inventory_slot_res = preload("res://inventory/inventory_slot.tscn")
 
 export(String) var inventory_name
-export(int) var size = 0 setget set_inventory_size
+export(int) var size = 0 setget inventory_size
 
 export(NodePath) onready var slot_container = get_node(slot_container) as Control
 
@@ -23,9 +23,12 @@ func _ready():
 
 	SignalManager.emit_signal("inventory_ready", self)
 	SignalManager.connect("arrow_shot", self, "_on_arrow_shot")
+	SignalManager.connect("plank_placed", self, "_on_plank_placed")
+	
+
 
 #sätter storleken
-func set_inventory_size(value):
+func inventory_size(value):
 	size = value
 	rect_min_size.y = 40 + (ceil(size/5.0) - 1) *22
 
@@ -35,7 +38,7 @@ func set_inventory_size(value):
 
 #Lägger till item i inventory
 func add_item(item):
-	item=add_stack_item(item)
+	item = add_item_stack(item)
 
 	if item:
 		for s in slots:
@@ -43,6 +46,8 @@ func add_item(item):
 				SignalManager.emit_signal("crossbow_obtained")
 			if item.id == "arrow":
 				SignalManager.emit_signal("arrow_obtained")
+			if item.id == "plank":
+				SignalManager.emit_signal("building")
 
 			if s.try_put_item(item):
 				item = s.put_item(item)
@@ -52,7 +57,7 @@ func add_item(item):
 	return item
 
 #Lägger till item i redan existerande stack
-func add_stack_item(item):
+func add_item_stack(item):
 	if item.stack_size > 1:
 		for s in slots:
 			if s.item and s.item.id == item.id and s.item.quantity < s.item.stack_size:
@@ -101,8 +106,9 @@ func remove_item_quantity(id,quantity): #tar bort items from inventory exempelvi
 				slots[s].item.quantity = 0
 				slots[s].put_item(null)
 				if id == "arrow":
-					print("id = arrow")
 					SignalManager.emit_signal("out_of_arrows")
+				if id == "plank":
+					SignalManager.emit_signal("out_of_plank")
 
 
 			else:
@@ -121,3 +127,5 @@ func _on_item_changed():
 
 func _on_arrow_shot():
 	remove_item_quantity("arrow", 1)
+func _on_plank_placed():
+	remove_item_quantity("plank", 1)

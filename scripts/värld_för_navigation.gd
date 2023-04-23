@@ -268,3 +268,4 @@ func _the_shitter_check() -> void:
 		#world_gen(width_function,height_function)
 	else:
 		pass
+

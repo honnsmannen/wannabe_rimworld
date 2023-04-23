@@ -14,17 +14,15 @@ onready var bow_scene = preload("res://scener/Bow.tscn")
 onready var arrow_scene = preload("res://scener/Arrow.tscn")
 onready var light = get_node("NightLight")
 export (int) var speed = 200
-#onready var hp = max_hp
 export(String) var crafting_list
 
 var velocity = Vector2()
-var dmg_amount = 10
+var dmg_amount = 25
 var can_attack := true
 var can_bow := false
 var can_move := true
 var arrow := true
 var direction := Vector2.RIGHT
-#var hunger := 100
 export( int ) var hunger = 50
 export( int ) var hp = 50
 var temp_item = ""
@@ -35,7 +33,6 @@ var carrying_item = "tom"
 var current_interactable
 
 func _ready():
-	SignalManager.connect("item_dropped", self, "_on_item_dropped")
 	SignalManager.connect("ate", self,  "_on_ate")
 	SignalManager.connect("crossbow_obtained", self, "_on_crossbow_obtained")
 	SignalManager.connect("out_of_arrows", self, "_on_out_of_arrows")
@@ -108,9 +105,9 @@ func damage(dmg_amount):
 		died()
 		
 func died():
-	visible = false
-	emit_signal("died")
-	
+	get_tree().quit()
+
+
 func _on_Zone_body_entered(body: Node) -> void:
 	if body.is_in_group("enemy"):
 		damage(dmg_amount)
@@ -127,7 +124,7 @@ func _shoot() -> void:
 func bow_shoot() -> void:
 	can_bow = false
 	SignalManager.emit_signal("arrow_shot")
-	$AttackTimer.start()
+	$BowTimer.start()
 
 	var bow_instance = bow_scene.instance()
 	var arrow_instance = arrow_scene.instance()
@@ -143,8 +140,15 @@ func bow_shoot() -> void:
 
 func _on_AttackTimer_timeout() -> void:
 	can_attack = true
-	can_bow = true
 	$AttackTimer.stop()
+
+
+
+func _on_BowTimer_timeout() -> void:
+	can_bow = true
+	$BowTimer.stop()
+
+
 
 func item_picked_up(item_id : String, amount) -> void:
 	if !carrying_an_item or carrying_item == item_id:
@@ -224,5 +228,7 @@ func _on_arrow_obtained():
 	arrow = true
 func _on_out_of_arrows():
 	arrow = false
-#func _on_arrow_shot():
+
+
+
 
