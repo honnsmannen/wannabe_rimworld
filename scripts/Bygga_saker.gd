@@ -5,7 +5,7 @@ onready var hungerbar = $CanvasLayer/HungerBar
 #onready var scoretext = $ScoreText
 onready var cell = null
 onready var new_abc = 0
-onready var tilemap = get_parent().get_node("TileMap")
+onready var tilemap = get_parent().get_node("bygg_tilemap")
 onready var player = get_parent().get_node("Filuren")
 var building = false
 var has_planks = false
@@ -29,7 +29,7 @@ func _process(delta):
 
 	
 	if Input.is_action_just_pressed("click") and building and has_planks:
-		tilemap.set_cellv(cell, 2)
+		tilemap.set_cellv(cell, 0)
 		SignalManager.emit_signal("plank_placed")
 	
 
