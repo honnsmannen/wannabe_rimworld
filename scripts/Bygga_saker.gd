@@ -31,7 +31,8 @@ func _process(delta):
 	if Input.is_action_just_pressed("click") and building and has_planks:
 		tilemap.set_cellv(cell, 0)
 		SignalManager.emit_signal("plank_placed")
-	
+	if Input.is_action_just_pressed("right_click"):
+		tilemap.set_cellv(cell, -1)
 
 func _on_Button_pressed() -> void:
 	if building == false:
